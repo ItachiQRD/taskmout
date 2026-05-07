@@ -176,15 +176,15 @@ export default function HomePage() {
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-              {/* Visuel — image principale plus dominante (crop CSS uniquement, fichier inchangé) */}
-              <div className="relative lg:col-span-7">
-                <div className="section-animate-item relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 ring-1 ring-inset ring-white/5 sm:aspect-[5/4] lg:aspect-[4/3]">
+              {/* Visuel — taille intermédiaire (entre l'ancienne version et la version très dominante) */}
+              <div className="relative lg:col-span-6">
+                <div className="section-animate-item relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 ring-1 ring-inset ring-white/5 sm:aspect-[5/4] lg:aspect-[16/10]">
                   <Image
                     src={HOME_IMG('atelier-taskmout.png')}
                     alt="Atelier Taskmout — gestes artisanaux"
                     fill
                     className="object-cover object-center"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1536px) 50vw, 960px"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 88vw, (max-width: 1536px) 45vw, 840px"
                     quality={95}
                     priority
                   />
@@ -198,13 +198,13 @@ export default function HomePage() {
                 </div>
 
                 {/* Vignette secondaire — nettement plus petite que l’image principale */}
-                <div className="section-animate-item absolute -bottom-6 -right-3 hidden aspect-square w-32 overflow-hidden rounded-2xl border border-argan-400/30 bg-neutral-950 shadow-[0_24px_56px_-18px_rgba(214,139,42,0.4)] ring-1 ring-inset ring-argan-400/10 sm:block sm:w-36 sm:-bottom-7 sm:-right-5 sm:rounded-3xl md:w-40">
+                <div className="section-animate-item absolute -bottom-6 -right-3 hidden aspect-square w-32 overflow-hidden rounded-2xl border border-argan-400/30 bg-neutral-950 shadow-[0_24px_56px_-18px_rgba(214,139,42,0.4)] ring-1 ring-inset ring-argan-400/10 sm:block sm:w-40 sm:-bottom-7 sm:-right-5 sm:rounded-3xl md:w-48 lg:w-52 xl:w-56">
                   <Image
                     src={HOME_IMG('process-2-pression.png')}
                     alt="Pression artisanale traditionnelle"
                     fill
                     className="object-cover object-center"
-                    sizes="(max-width: 1024px) 160px, 320px"
+                    sizes="(max-width: 640px) 160px, (max-width: 1024px) 192px, (max-width: 1536px) 208px, 224px"
                     quality={95}
                   />
                 </div>
@@ -216,7 +216,7 @@ export default function HomePage() {
               </div>
 
               {/* Texte */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-6">
                 <p className="section-animate text-argan-300 uppercase tracking-[0.25em] text-xs font-semibold">
                   La maison Taskmout
                 </p>

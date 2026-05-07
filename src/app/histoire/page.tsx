@@ -64,8 +64,6 @@ const TIMELINE = [
       "Taskmout, c'est ce que nous voulons partager avec vous : des huiles, des tartinables et un miel qui ont du sens, du goût et de l'histoire.",
     image: 'timeline-marque.png',
     alt: 'Coffret Taskmout finalisé',
-    /** Image produit détaillée : affichage entier sans rogner */
-    imageFit: 'contain' as const,
   },
 ];
 
@@ -214,34 +212,17 @@ export default function HistoirePage() {
 
                       {/* Image */}
                       <div className={`mt-6 md:mt-0 ${isLeft ? 'md:order-2' : 'md:order-1'}`}>
-                        <div
-                          className={`relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.25)] ${
-                            step.imageFit === 'contain'
-                              ? 'bg-neutral-950 ring-1 ring-inset ring-white/5'
-                              : 'bg-white/5'
-                          }`}
-                        >
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.25)]">
                           <Image
                             src={IMG(step.image)}
                             alt={step.alt}
                             fill
-                            className={
-                              step.imageFit === 'contain'
-                                ? 'object-contain object-center p-3 sm:p-4'
-                                : 'object-cover object-center'
-                            }
+                            className="object-cover object-center"
                             sizes="(max-width: 768px) min(100vw, 900px), min(50vw, 900px)"
-                            quality={step.imageFit === 'contain' ? 95 : 93}
+                            quality={93}
                             priority={step.year === 'Taskmout'}
                           />
-                          {step.imageFit === 'contain' ? (
-                            <div
-                              aria-hidden
-                              className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-transparent"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
-                          )}
+                          <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
                         </div>
                       </div>
 
@@ -294,13 +275,13 @@ export default function HistoirePage() {
                 </div>
               </div>
 
-              {/* Mosaïque : conteneur plus large → visuel complet, dézoomé, centré (même fichier source) */}
-              <div className="section-animate-item relative aspect-[5/4] w-full overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.3)] sm:aspect-[16/10] lg:aspect-[2/1] lg:min-h-[280px]">
+              {/* Mosaïque : style initial restauré (le souci venait du fichier source) */}
+              <div className="section-animate-item relative w-full rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.3)] aspect-[762/571]">
                 <Image
                   src={IMG('savoir-faire-mosaic.png')}
                   alt="Mosaïque savoir-faire Taskmout — amandons, olives, miel, amlou"
                   fill
-                  className="object-contain object-center p-4 sm:p-6 lg:p-8"
+                  className="object-cover object-center"
                   sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 50vw, 900px"
                   quality={95}
                 />
