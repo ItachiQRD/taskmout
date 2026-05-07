@@ -15,8 +15,17 @@ export function ConditionalLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
+      <a href="#contenu-principal" className="skip-to-content">
+        Aller au contenu principal
+      </a>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main
+        id="contenu-principal"
+        className="flex min-h-0 w-full flex-1 flex-col min-w-0"
+        tabIndex={-1}
+      >
+        {children}
+      </main>
       <Footer />
       <CookieBanner />
     </>

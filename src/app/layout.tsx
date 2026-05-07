@@ -75,7 +75,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${amiri.variable}`}>
-      <body className="min-h-screen flex flex-col">
+      <body className="relative min-h-screen flex flex-col">
         <StoreProvider>
           <ConditionalLayout>{children}</ConditionalLayout>
         </StoreProvider>

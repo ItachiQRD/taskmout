@@ -16,8 +16,8 @@ const legal = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#111] border-t border-white/10 text-cream mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
+    <footer className="bg-[#111] border-t border-white/10 text-cream">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-14 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           <div>
             <Link href="/" className="flex items-center gap-2 font-display text-xl font-semibold text-cream">

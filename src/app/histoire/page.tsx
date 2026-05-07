@@ -64,6 +64,8 @@ const TIMELINE = [
       "Taskmout, c'est ce que nous voulons partager avec vous : des huiles, des tartinables et un miel qui ont du sens, du goût et de l'histoire.",
     image: 'timeline-marque.png',
     alt: 'Coffret Taskmout finalisé',
+    /** Image produit détaillée : affichage entier sans rogner */
+    imageFit: 'contain' as const,
   },
 ];
 
@@ -77,8 +79,9 @@ export default function HistoirePage() {
           alt="Champ d'arganiers au coucher du soleil"
           fill
           priority
-          className="object-cover opacity-50"
+          className="object-cover object-center opacity-50"
           sizes="100vw"
+          quality={90}
         />
         <div
           aria-hidden
@@ -103,11 +106,11 @@ export default function HistoirePage() {
               l&apos;amlou. Voici comment nous en sommes arrivés là.
             </p>
             <div className="section-animate-item mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/savoir-plus" className="btn-primary inline-flex items-center gap-2">
+              <Link href="/savoir-plus" className="btn-primary inline-flex items-center gap-2 px-7">
                 Découvrir nos produits
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 shrink-0" aria-hidden />
               </Link>
-              <Link href="/articles" className="btn-outline inline-flex items-center gap-2 border-argan-400/70 text-cream/90 hover:bg-white/10">
+              <Link href="/articles" className="btn-outline-dark inline-flex gap-2">
                 Voir la gamme
               </Link>
             </div>
@@ -125,8 +128,9 @@ export default function HistoirePage() {
                   src={IMG('origines-cuisine-famille.png')}
                   alt="Cuisine familiale marocaine — origines Taskmout"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 600px"
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 50vw, 720px"
+                  quality={95}
                 />
                 <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
@@ -210,15 +214,34 @@ export default function HistoirePage() {
 
                       {/* Image */}
                       <div className={`mt-6 md:mt-0 ${isLeft ? 'md:order-2' : 'md:order-1'}`}>
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.25)]">
+                        <div
+                          className={`relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.25)] ${
+                            step.imageFit === 'contain'
+                              ? 'bg-neutral-950 ring-1 ring-inset ring-white/5'
+                              : 'bg-white/5'
+                          }`}
+                        >
                           <Image
                             src={IMG(step.image)}
                             alt={step.alt}
                             fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
+                            className={
+                              step.imageFit === 'contain'
+                                ? 'object-contain object-center p-3 sm:p-4'
+                                : 'object-cover object-center'
+                            }
+                            sizes="(max-width: 768px) min(100vw, 900px), min(50vw, 900px)"
+                            quality={step.imageFit === 'contain' ? 95 : 93}
+                            priority={step.year === 'Taskmout'}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
+                          {step.imageFit === 'contain' ? (
+                            <div
+                              aria-hidden
+                              className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-transparent"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
+                          )}
                         </div>
                       </div>
 
@@ -259,24 +282,31 @@ export default function HistoirePage() {
                   </p>
                 </div>
                 <div className="section-animate-item mt-8">
-                  <Link href="/savoir-plus" className="btn-cta-discover inline-flex items-center gap-2">
-                    Voir nos produits & bienfaits
-                    <ArrowRight className="w-4 h-4" />
+                  <Link
+                    href="/savoir-plus"
+                    className="btn-primary btn-cta-discover inline-flex items-center justify-center gap-2 text-center"
+                  >
+                    <span className="leading-snug max-w-[min(100%,220px)] sm:max-w-none">
+                      Voir nos produits &amp; bienfaits
+                    </span>
+                    <ArrowRight className="w-5 h-5 shrink-0" aria-hidden />
                   </Link>
                 </div>
               </div>
 
-              <div className="section-animate-item relative aspect-square rounded-3xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.3)]">
+              {/* Mosaïque : conteneur plus large → visuel complet, dézoomé, centré (même fichier source) */}
+              <div className="section-animate-item relative aspect-[5/4] w-full overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.3)] sm:aspect-[16/10] lg:aspect-[2/1] lg:min-h-[280px]">
                 <Image
                   src={IMG('savoir-faire-mosaic.png')}
                   alt="Mosaïque savoir-faire Taskmout — amandons, olives, miel, amlou"
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 560px"
+                  className="object-contain object-center p-4 sm:p-6 lg:p-8"
+                  sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 50vw, 900px"
+                  quality={95}
                 />
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/25 via-transparent to-argan-400/10"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-argan-400/10"
                 />
               </div>
             </div>

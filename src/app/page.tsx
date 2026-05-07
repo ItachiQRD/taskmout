@@ -176,15 +176,17 @@ export default function HomePage() {
         <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
-              {/* Visuel — collage à gauche */}
-              <div className="lg:col-span-5 relative">
-                <div className="section-animate-item relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+              {/* Visuel — image principale plus dominante (crop CSS uniquement, fichier inchangé) */}
+              <div className="relative lg:col-span-7">
+                <div className="section-animate-item relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 ring-1 ring-inset ring-white/5 sm:aspect-[5/4] lg:aspect-[4/3]">
                   <Image
                     src={HOME_IMG('atelier-taskmout.png')}
                     alt="Atelier Taskmout — gestes artisanaux"
                     fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 480px"
+                    className="object-cover object-center"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, (max-width: 1536px) 50vw, 960px"
+                    quality={95}
+                    priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                   <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
@@ -195,14 +197,15 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                {/* Vignette flottante */}
-                <div className="section-animate-item hidden sm:block absolute -bottom-8 -right-6 w-44 aspect-square rounded-3xl overflow-hidden border border-argan-400/30 shadow-[0_30px_80px_-20px_rgba(214,139,42,0.45)] bg-white/5">
+                {/* Vignette secondaire — nettement plus petite que l’image principale */}
+                <div className="section-animate-item absolute -bottom-6 -right-3 hidden aspect-square w-32 overflow-hidden rounded-2xl border border-argan-400/30 bg-neutral-950 shadow-[0_24px_56px_-18px_rgba(214,139,42,0.4)] ring-1 ring-inset ring-argan-400/10 sm:block sm:w-36 sm:-bottom-7 sm:-right-5 sm:rounded-3xl md:w-40">
                   <Image
                     src={HOME_IMG('process-2-pression.png')}
                     alt="Pression artisanale traditionnelle"
                     fill
-                    className="object-cover"
-                    sizes="180px"
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 160px, 320px"
+                    quality={95}
                   />
                 </div>
                 {/* Badge décoratif */}
@@ -213,7 +216,7 @@ export default function HomePage() {
               </div>
 
               {/* Texte */}
-              <div className="lg:col-span-7">
+              <div className="lg:col-span-5">
                 <p className="section-animate text-argan-300 uppercase tracking-[0.25em] text-xs font-semibold">
                   La maison Taskmout
                 </p>
@@ -265,15 +268,15 @@ export default function HomePage() {
                 </div>
 
                 <div className="section-animate-item mt-10 flex flex-wrap gap-3">
-                  <Link href="/histoire" className="btn-cta-discover inline-flex items-center gap-2">
-                    Notre histoire
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
                   <Link
-                    href="/savoir-plus"
-                    className="btn-outline inline-flex items-center gap-2 border-argan-400/70 text-cream/90 hover:bg-white/10"
+                    href="/histoire"
+                    className="btn-primary btn-cta-discover inline-flex items-center justify-center gap-2"
                   >
-                    Bienfaits & recettes
+                    Notre histoire
+                    <ArrowRight className="w-5 h-5 shrink-0" aria-hidden />
+                  </Link>
+                  <Link href="/savoir-plus" className="btn-outline-dark inline-flex items-center gap-2">
+                    Bienfaits &amp; recettes
                   </Link>
                 </div>
               </div>
@@ -339,7 +342,8 @@ export default function HomePage() {
                       alt={c.title}
                       fill
                       className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1536px) 25vw, 480px"
+                      quality={93}
                     />
                     <div
                       className={`pointer-events-none absolute inset-0 bg-gradient-to-t ${c.accent}`}
@@ -388,13 +392,14 @@ export default function HomePage() {
                       reversed ? 'md:[&>*:first-child]:order-2' : ''
                     }`}
                   >
-                    <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+                    <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-neutral-950">
                       <Image
                         src={step.image}
                         alt={step.alt}
                         fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-cover object-center"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 640px"
+                        quality={93}
                       />
                       <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
                       <span className="absolute top-4 left-4 font-oriental text-5xl sm:text-6xl text-argan-300/90 drop-shadow-[0_4px_18px_rgba(214,139,42,0.45)]">

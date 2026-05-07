@@ -78,7 +78,7 @@ export function HomeContactSection() {
   };
 
   return (
-    <section className="min-h-screen flex items-center border-t border-white/10 bg-[#0f0f0f] relative overflow-hidden">
+    <section className="relative flex flex-1 flex-col overflow-hidden border-t border-white/10 bg-[#0f0f0f]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(214,139,42,0.10),_transparent_55%),radial-gradient(ellipse_at_bottom_right,_rgba(140,160,60,0.08),_transparent_55%)]"
