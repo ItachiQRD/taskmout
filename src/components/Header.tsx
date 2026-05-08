@@ -12,6 +12,7 @@ import {
   Mail,
   MapPin,
   Phone,
+  Shield,
   ShoppingBag,
   Sparkles,
   X,
@@ -128,6 +129,15 @@ export function Header() {
               className="hidden lg:inline-flex min-h-[40px] items-center rounded-xl border border-argan-400/45 px-4 text-sm font-medium text-cream/95 transition-colors hover:bg-white/[0.08] hover:border-argan-400/65"
             >
               Nous écrire
+            </Link>
+
+            <Link
+              href="/admin/login"
+              className="hidden lg:inline-flex size-10 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-cream/80 transition-colors hover:text-argan-200 hover:border-argan-400/35 hover:bg-white/[0.08]"
+              aria-label="Connexion administrateur"
+              title="Connexion administrateur"
+            >
+              <Shield className="size-[1.05rem]" />
             </Link>
 
             {/* Bouton menu mobile — pastille ronde animée */}
@@ -273,6 +283,20 @@ export function Header() {
               <p className="px-3 pt-2 pb-1 text-[11px] uppercase tracking-[0.18em] text-cream/45 font-semibold">
                 Nous joindre
               </p>
+
+              <Link
+                href="/admin/login"
+                onClick={closeDrawer}
+                className="group flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm text-cream/85 transition-colors hover:bg-white/[0.05] hover:text-cream"
+              >
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-argan-300">
+                  <Shield className="size-4" aria-hidden />
+                </span>
+                <span className="min-w-0 flex flex-col">
+                  <span className="leading-tight">Connexion admin</span>
+                  <span className="text-[12px] text-cream/55 truncate">Accès réservé</span>
+                </span>
+              </Link>
 
               <a
                 href="mailto:contact@taskmout.fr"

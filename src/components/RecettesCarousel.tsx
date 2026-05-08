@@ -19,15 +19,21 @@ type RecettesCarouselProps = {
 
 export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
   const [current, setCurrent] = useState(0);
+  const [showMobileDetails, setShowMobileDetails] = useState(false);
 
-  const goPrev = () => setCurrent((i) => (i === 0 ? recettes.length - 1 : i - 1));
-  const goNext = () => setCurrent((i) => (i === recettes.length - 1 ? 0 : i + 1));
+  const goPrev = () => {
+    setCurrent((i) => (i === 0 ? recettes.length - 1 : i - 1));
+    setShowMobileDetails(false);
+  };
+  const goNext = () => {
+    setCurrent((i) => (i === recettes.length - 1 ? 0 : i + 1));
+    setShowMobileDetails(false);
+  };
 
   return (
     <div className="w-full">
-      {/* Diaporama horizontal : une slide à la fois, image affichée en entier (object-contain) */}
+      {/* Diaporama horizontal : une slide à la fois */}
       <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d]">
-        {/* Zone image plus grande sur desktop, image entière sans crop */}
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[320px] sm:max-h-[420px] md:max-h-[520px]">
           {recettes.map((r, i) => (
             <div
@@ -41,20 +47,15 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
                 className="object-contain"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, min(1200px, 90vw)"
               />
-              {/* Rideau au survol : descend du haut — version courte mobile, détaillée desktop */}
+              {/* Rideau au survol : desktop uniquement */}
               <div
-                className="absolute inset-x-0 top-0 h-0 bg-[#1a1a1a]/95 backdrop-blur-sm transition-all duration-300 ease-out overflow-hidden group-hover:h-full flex flex-col"
+                className="absolute inset-x-0 top-0 hidden h-0 bg-[#1a1a1a]/95 backdrop-blur-sm transition-all duration-300 ease-out overflow-hidden group-hover:h-full md:flex flex-col"
                 aria-hidden
               >
                 <div className="p-4 sm:p-5 md:p-6 flex flex-col flex-1 min-h-0 overflow-y-auto">
                   <h3 className="font-display text-lg sm:text-xl font-semibold text-cream shrink-0">
                     {r.title}
                   </h3>
-                  {/* Mobile : courte description */}
-                  <p className="mt-2 text-cream/80 text-sm leading-relaxed md:hidden line-clamp-4">
-                    {r.description}
-                  </p>
-                  {/* Desktop : détails complets pour remplir le voile (ingrédients, étapes, conseils) */}
                   <p className="mt-2 md:mt-3 text-cream/85 text-sm leading-relaxed hidden md:block whitespace-pre-line">
                     {r.detailsDesktop ?? r.description}
                   </p>
@@ -99,13 +100,36 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
           <button
             key={i}
             type="button"
-            onClick={() => setCurrent(i)}
+            onClick={() => {
+              setCurrent(i);
+              setShowMobileDetails(false);
+            }}
             className={`w-2.5 h-2.5 rounded-full transition-colors ${
               i === current ? 'bg-argan-400' : 'bg-white/30 hover:bg-white/50'
             }`}
             aria-label={`Voir recette ${i + 1}`}
           />
         ))}
+      </div>
+
+      {/* Détails mobile au tap (remplace l'effet hover desktop) */}
+      <div className="mt-3 md:hidden">
+        <button
+          type="button"
+          onClick={() => setShowMobileDetails((v) => !v)}
+          className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 text-sm font-medium text-cream/90 hover:bg-white/[0.08] transition-colors"
+          aria-expanded={showMobileDetails}
+        >
+          {showMobileDetails ? 'Masquer les détails' : 'Voir les détails de la recette'}
+        </button>
+        {showMobileDetails && (
+          <div className="mt-3 rounded-xl border border-white/10 bg-white/[0.04] p-4">
+            <h4 className="font-display text-base text-cream">{recettes[current].title}</h4>
+            <p className="mt-2 text-sm text-cream/80 leading-relaxed whitespace-pre-line">
+              {recettes[current].detailsDesktop ?? recettes[current].description}
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
