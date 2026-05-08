@@ -33,7 +33,7 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
   return (
     <div className="w-full">
       {/* Diaporama horizontal : une slide à la fois */}
-      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d]">
+      <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0d0d0d] touch-pan-y">
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[320px] sm:max-h-[420px] md:max-h-[520px]">
           {recettes.map((r, i) => (
             <div
@@ -69,7 +69,7 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
         <button
           type="button"
           onClick={goPrev}
-          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-cream flex items-center justify-center transition-colors"
+          className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/55 hover:bg-black/75 text-cream flex items-center justify-center transition-colors md:w-10 md:h-10"
           aria-label="Recette précédente"
         >
           <ChevronLeft className="w-6 h-6" />
@@ -77,7 +77,7 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
         <button
           type="button"
           onClick={goNext}
-          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-cream flex items-center justify-center transition-colors"
+          className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-black/55 hover:bg-black/75 text-cream flex items-center justify-center transition-colors md:w-10 md:h-10"
           aria-label="Recette suivante"
         >
           <ChevronRight className="w-6 h-6" />

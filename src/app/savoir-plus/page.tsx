@@ -10,25 +10,25 @@ const BIENFAITS_CORPS = [
     key: 'cheveux',
     title: 'Cheveux',
     description:
-      "Nourrissement des pointes et des longueurs, brillance. L'huile d'argan peut être appliquée en masque ou en soin sans rinçage pour favoriser la pousse et limiter les fourches.",
+      "Nourrit les pointes et apporte de la brillance. Utilisable en masque ou en soin léger pour limiter les fourches.",
   },
   {
     key: 'barbe',
     title: 'Barbe',
     description:
-      "Hydratation de la barbe et de la peau en dessous. Quelques gouttes suffisent pour assouplir le poil et apaiser les irritations, tout en favorisant une pousse saine.",
+      "Hydrate la barbe et la peau. Quelques gouttes suffisent pour assouplir le poil et calmer les irritations.",
   },
   {
     key: 'peau',
     title: 'Peau & massage',
     description:
-      "L'huile d'argan est absorbée facilement et convient aux zones sèches (mains, coudes, pieds). Idéale en huile de massage pour la détente et l'hydratation.",
+      "Absorption rapide sur les zones sèches (mains, coudes, pieds). Idéale en massage pour hydrater et détendre.",
   },
   {
     key: 'ongles',
     title: 'Ongles & cuticules',
     description:
-      'Quelques gouttes massées sur les ongles et les cuticules aident à les renforcer et à limiter les gerçures.',
+      'Aide à renforcer ongles et cuticules. Un massage court et régulier limite les gerçures.',
   },
 ] as const;
 
@@ -88,10 +88,29 @@ export default function SavoirPlusPage() {
             </p>
           </AnimateSection>
         </div>
+        {/* Accès rapide mobile */}
+        <div className="md:hidden mt-6 px-4">
+          <div className="mx-auto max-w-4xl rounded-2xl border border-white/10 bg-white/[0.04] p-2">
+            <div className="grid grid-cols-2 gap-2">
+              <a href="#sp-produits" className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-white/[0.05] px-3 text-xs font-medium text-cream/90">
+                Produits
+              </a>
+              <a href="#sp-nutrition" className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-white/[0.05] px-3 text-xs font-medium text-cream/90">
+                Nutrition
+              </a>
+              <a href="#sp-corps" className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-white/[0.05] px-3 text-xs font-medium text-cream/90">
+                Corps
+              </a>
+              <a href="#sp-recettes" className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-white/[0.05] px-3 text-xs font-medium text-cream/90">
+                Recettes
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* 1.1 Les huiles et produits de base */}
-      <section className="py-12 sm:py-24 border-b border-white/10">
+      <section id="sp-produits" className="py-12 sm:py-24 border-b border-white/10">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
@@ -112,7 +131,8 @@ export default function SavoirPlusPage() {
                 <div className="flex-1 sm:border-l-4 sm:border-argan-500/50 sm:pl-4 flex flex-col justify-center">
                   <h3 className="font-display text-xl text-argan-300">Huile d&apos;argan</h3>
                   <p className="mt-1.5 sm:mt-2 text-cream/80 text-sm sm:text-base leading-relaxed">
-                    Originaire du Sud-Ouest marocain, l&apos;huile d&apos;argan est extraite des amandons de l&apos;arganier. Nous la proposons pressée à froid pour préserver ses qualités. Elle s&apos;utilise en cuisine (assaisonnement, finition de plats) comme en cosmétique (peau, cheveux, ongles).
+                    Pressée à froid à partir des amandons d&apos;arganier.
+                    Utilisation simple : assaisonnement, finition de plats, peau et cheveux.
                   </p>
                 </div>
               </div>
@@ -125,7 +145,8 @@ export default function SavoirPlusPage() {
                 <div className="flex-1 min-w-0 sm:border-r-4 sm:border-olive-400/50 sm:pr-4 sm:text-right flex flex-col justify-center">
                   <h3 className="font-display text-xl text-olive-300">Huile d&apos;olive</h3>
                   <p className="mt-1.5 sm:mt-2 text-cream/80 text-sm sm:text-base leading-relaxed">
-                    Nos huiles d&apos;olive proviennent de terroirs sélectionnés. Variétés et récoltes sont choisies pour leur fruité et leur équilibre. Idéales en salade, sur les tartines ou en finition sur les plats chauds.
+                    Huiles issues de terroirs sélectionnés, au profil fruité équilibré.
+                    Parfaites en salade, sur tartines ou en touche finale.
                   </p>
                 </div>
               </div>
@@ -134,7 +155,8 @@ export default function SavoirPlusPage() {
               <div className="section-animate-item p-4 sm:p-8 rounded-2xl bg-white/5 border border-white/10 border-l-4 border-l-argan-500/30 transition-all duration-300 hover:border-l-argan-400/60 text-center max-w-3xl mx-auto">
                 <h3 className="font-display text-xl text-cream">Autres huiles</h3>
                 <p className="mt-1.5 sm:mt-2 text-cream/80 text-sm sm:text-base leading-relaxed">
-                  Nous travaillons aussi des huiles de noix, d&apos;amande ou d&apos;autres fruits à coque selon les saisons, toujours avec la même exigence d&apos;origine et de pression à froid.
+                  Selon la saison : noix, amande et autres fruits à coque.
+                  Même exigence : origine claire et pression à froid.
                 </p>
               </div>
 
@@ -146,7 +168,8 @@ export default function SavoirPlusPage() {
                 <div className="flex-1 sm:border-l-4 sm:border-argan-400/50 sm:pl-4 flex flex-col justify-center">
                   <h3 className="font-display text-xl text-argan-300">Miel</h3>
                   <p className="mt-1.5 sm:mt-2 text-cream/80 text-sm sm:text-base leading-relaxed">
-                    Le miel entre dans la composition de l&apos;amlou et accompagne nos tartinables. Nous privilégions des miels de terroir pour leur goût et leur naturalité, en cuisine comme au petit-déjeuner.
+                    Miels de terroir choisis pour leur goût et leur naturalité.
+                    Idéals au petit-déjeuner, en cuisine et dans l&apos;amlou.
                   </p>
                 </div>
               </div>
@@ -159,7 +182,8 @@ export default function SavoirPlusPage() {
                 <div className="flex-1 min-w-0 sm:border-r-4 sm:border-argan-500/50 sm:pr-4 sm:text-right flex flex-col justify-center">
                   <h3 className="font-display text-xl text-argan-300">Amlou</h3>
                   <p className="mt-1.5 sm:mt-2 text-cream/80 text-sm sm:text-base leading-relaxed">
-                    Pâte onctueuse à l&apos;amande (ou cacahuète), à l&apos;huile d&apos;argan et au miel. Tartinable du petit-déjeuner ou base pour vos recettes sucrées, 100 % naturel et issu des mêmes terroirs que nos huiles.
+                    Pâte onctueuse amande (ou cacahuète), huile d&apos;argan et miel.
+                    À tartiner ou à intégrer dans vos desserts.
                   </p>
                 </div>
               </div>
@@ -169,7 +193,7 @@ export default function SavoirPlusPage() {
       </section>
 
       {/* 1.2 Bienfaits nutritionnels */}
-      <section className="py-12 sm:py-24 border-b border-white/10 bg-[#111111]">
+      <section id="sp-nutrition" className="py-12 sm:py-24 border-b border-white/10 bg-[#111111]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
@@ -177,8 +201,8 @@ export default function SavoirPlusPage() {
                 Bienfaits nutritionnels
               </h2>
               <p className="section-animate mt-4 text-cream/80 leading-relaxed">
-                Les huiles d&apos;argan et d&apos;olive sont riches en acides gras insaturés, en vitamine E et en antioxydants.
-                Une consommation raisonnée participe à une alimentation équilibrée.
+                Riches en acides gras insaturés, vitamine E et antioxydants.
+                En quantité raisonnable, elles s&apos;intègrent à une alimentation équilibrée.
               </p>
             </div>
 
@@ -190,7 +214,7 @@ export default function SavoirPlusPage() {
               <ul className="section-animate-item space-y-3 sm:space-y-4 text-cream/85 max-w-md">
                 <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-argan-400/30">
                   <span className="text-argan-400 shrink-0 mt-1">●</span>
-                  <span>Utilisation en assaisonnement de salades et crudités.</span>
+                  <span>Assaisonnement de salades et crudités.</span>
                 </li>
                 <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-argan-400/30">
                   <span className="text-argan-400 shrink-0 mt-1">●</span>
@@ -198,7 +222,7 @@ export default function SavoirPlusPage() {
                 </li>
                 <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-argan-400/30">
                   <span className="text-argan-400 shrink-0 mt-1">●</span>
-                  <span>Finition de plats chauds (légumes, poissons, soupes) pour préserver les nutriments.</span>
+                  <span>Finition de plats chauds pour préserver les nutriments.</span>
                 </li>
               </ul>
             </div>
@@ -207,7 +231,7 @@ export default function SavoirPlusPage() {
       </section>
 
       {/* 1.3 Bienfaits pour le corps — disposition losange */}
-      <section className="py-12 sm:py-24 border-b border-white/10 bg-[radial-gradient(ellipse_at_center,_rgba(214,139,42,0.06),_transparent_60%)]">
+      <section id="sp-corps" className="py-12 sm:py-24 border-b border-white/10 bg-[radial-gradient(ellipse_at_center,_rgba(214,139,42,0.06),_transparent_60%)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
@@ -293,7 +317,7 @@ export default function SavoirPlusPage() {
       </section>
 
       {/* 1.4 Idées de recettes — carousel avec rideau au survol */}
-      <section className="py-12 sm:py-24 border-b border-white/10 bg-[#111111]">
+      <section id="sp-recettes" className="py-12 sm:py-24 border-b border-white/10 bg-[#111111]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
