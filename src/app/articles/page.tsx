@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useStore } from '@/context/StoreContext';
-import { ProductCard } from '@/components/ProductCard';
+import { MaisonProductCard } from '@/components/MaisonProductCard';
 import { AnimateSection } from '@/components/AnimateSection';
 import { Search, SlidersHorizontal, X, Sparkles, ArrowRight } from 'lucide-react';
 
@@ -73,24 +73,24 @@ export default function ArticlesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1a1a1a]">
+    <div className="min-h-screen bg-maison-creme pt-6">
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/10">
+      <section className="relative overflow-hidden border-b border-maison-brun/10 bg-white">
         <div
           aria-hidden
-          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(214,139,42,0.18),_transparent_55%),radial-gradient(ellipse_at_bottom_left,_rgba(140,160,60,0.10),_transparent_55%)]"
+          className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(90,56,37,0.05),_transparent_55%)]"
         />
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+        <div className="relative mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
           <AnimateSection>
             <div className="flex flex-col items-start gap-4">
-              <div className="section-animate inline-flex items-center gap-2 px-4 py-2 rounded-full border border-argan-400/25 bg-white/5 text-cream/90 text-sm">
-                <Sparkles className="w-4 h-4 text-argan-300" />
-                Notre gamme {totalActive > 0 && <span className="text-cream/60">— {totalActive} articles</span>}
+              <div className="section-animate inline-flex items-center gap-2 rounded-full border border-maison-brun/15 bg-maison-sable/35 px-4 py-2 text-sm text-maison-cacao/90">
+                <Sparkles className="size-4 text-maison-brun" />
+                Notre gamme {totalActive > 0 && <span className="text-maison-cacao/60">— {totalActive} articles</span>}
               </div>
-              <h1 className="section-animate font-oriental text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-argan-300 via-argan-400 to-olive-400 bg-clip-text text-transparent">
-                Tous les articles
+              <h1 className="section-animate font-display text-4xl font-semibold uppercase tracking-[0.06em] text-maison-cacao sm:text-5xl md:text-6xl">
+                La boutique
               </h1>
-              <p className="section-animate text-cream/80 text-lg max-w-2xl leading-relaxed">
+              <p className="section-animate max-w-2xl text-lg leading-relaxed text-maison-cacao/78">
                 Huiles d&apos;argan et d&apos;olive, miel, amlou et coffrets&nbsp;: filtrez par catégorie,
                 recherchez ou triez selon vos envies.
               </p>
@@ -100,14 +100,14 @@ export default function ArticlesPage() {
       </section>
 
       {/* Barre de filtres sticky */}
-      <div className="sticky top-14 z-30 border-b border-white/10 bg-[#1a1a1a]/92 backdrop-blur-md sm:top-16">
+      <div className="sticky top-[6.75rem] z-30 border-b border-maison-brun/10 bg-maison-creme/95 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col gap-3">
             {/* Recherche + tri */}
             <div className="flex flex-col sm:flex-row gap-3">
               <div className="relative flex-1">
                 <Search
-                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream/50"
+                  className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-maison-cacao/50"
                   aria-hidden
                 />
                 <input
@@ -116,13 +116,13 @@ export default function ArticlesPage() {
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="Rechercher un produit, un ingrédient…"
-                  className="w-full min-h-[48px] pl-11 pr-10 rounded-2xl border border-white/15 bg-white/5 text-cream placeholder-cream/50 focus:border-argan-500 focus:ring-2 focus:ring-argan-500/30 focus:outline-none transition-colors"
+                  className="w-full min-h-[48px] pl-11 pr-10 rounded-2xl border border-maison-brun/15 bg-white text-maison-cacao placeholder-maison-cacao/50 focus:border-maison-brun focus:ring-2 focus:ring-maison-brun/20 focus:outline-none transition-colors"
                 />
                 {search && (
                   <button
                     type="button"
                     onClick={() => setSearch('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-cream/80 flex items-center justify-center"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-maison-cacao/80 flex items-center justify-center"
                     aria-label="Effacer la recherche"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -136,29 +136,29 @@ export default function ArticlesPage() {
                 </label>
                 <div className="relative">
                   <SlidersHorizontal
-                    className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream/60"
+                    className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-maison-cacao/60"
                     aria-hidden
                   />
                   <select
                     id="sort"
                     value={sort}
                     onChange={(e) => setSort(e.target.value as SortKey)}
-                    className="min-h-[48px] pl-11 pr-8 rounded-2xl border border-white/15 bg-white/5 text-cream font-medium focus:border-argan-500 focus:ring-2 focus:ring-argan-500/30 focus:outline-none transition-colors cursor-pointer"
+                    className="min-h-[48px] pl-11 pr-8 rounded-2xl border border-maison-brun/15 bg-white text-maison-cacao font-medium focus:border-maison-brun focus:ring-2 focus:ring-maison-brun/20 focus:outline-none transition-colors cursor-pointer"
                   >
                     {(Object.keys(SORT_LABELS) as SortKey[]).map((k) => (
-                      <option key={k} value={k} className="bg-[#1a1a1a] text-cream">
+                      <option key={k} value={k} className="bg-white text-maison-cacao">
                         {SORT_LABELS[k]}
                       </option>
                     ))}
                   </select>
                 </div>
 
-                <label className="hidden md:inline-flex items-center gap-2 px-4 min-h-[48px] rounded-2xl border border-white/15 bg-white/5 text-cream/90 text-sm cursor-pointer select-none hover:bg-white/10 transition-colors">
+                <label className="hidden md:inline-flex items-center gap-2 px-4 min-h-[48px] rounded-2xl border border-white/15 bg-white/5 text-maison-cacao/90 text-sm cursor-pointer select-none hover:bg-white/10 transition-colors">
                   <input
                     type="checkbox"
                     checked={hideOutOfStock}
                     onChange={(e) => setHideOutOfStock(e.target.checked)}
-                    className="accent-argan-500 w-4 h-4"
+                    className="accent-maison-brun w-4 h-4"
                   />
                   En stock seulement
                 </label>
@@ -172,8 +172,8 @@ export default function ArticlesPage() {
                 onClick={() => setSelectedCategoryId(null)}
                 className={`min-h-[40px] px-4 rounded-full text-sm font-medium transition-all duration-200 ${
                   selectedCategoryId === null
-                    ? 'bg-argan-500 text-white shadow-warm'
-                    : 'bg-white/5 text-cream/90 border border-white/15 hover:border-argan-400/40 hover:bg-white/10'
+                    ? 'bg-maison-brun text-white shadow-warm'
+                    : 'bg-white/5 text-maison-cacao/90 border border-maison-brun/15 hover:border-maison-brun/35 hover:bg-maison-sable/30'
                 }`}
               >
                 Tous
@@ -185,8 +185,8 @@ export default function ArticlesPage() {
                   onClick={() => setSelectedCategoryId(c.id)}
                   className={`min-h-[40px] px-4 rounded-full text-sm font-medium transition-all duration-200 ${
                     selectedCategoryId === c.id
-                      ? 'bg-argan-500 text-white shadow-warm'
-                      : 'bg-white/5 text-cream/90 border border-white/15 hover:border-argan-400/40 hover:bg-white/10'
+                      ? 'bg-maison-brun text-white shadow-warm'
+                      : 'bg-white/5 text-maison-cacao/90 border border-maison-brun/15 hover:border-maison-brun/35 hover:bg-maison-sable/30'
                   }`}
                 >
                   {c.name}
@@ -197,7 +197,7 @@ export default function ArticlesPage() {
                 <button
                   type="button"
                   onClick={resetFilters}
-                  className="ml-auto inline-flex items-center gap-1.5 text-sm text-cream/70 hover:text-argan-300 transition-colors"
+                  className="ml-auto inline-flex items-center gap-1.5 text-sm text-maison-cacao/70 hover:text-maison-brun transition-colors"
                 >
                   <X className="w-3.5 h-3.5" />
                   Réinitialiser
@@ -212,28 +212,29 @@ export default function ArticlesPage() {
       <section className="py-10 sm:py-14">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <div className="flex items-baseline justify-between gap-4 mb-6">
-            <p className="text-cream/70 text-sm">
-              <span className="text-cream font-semibold">{filtered.length}</span> résultat
+            <p className="text-maison-cacao/70 text-sm">
+              <span className="font-semibold text-maison-cacao">{filtered.length}</span> résultat
               {filtered.length > 1 ? 's' : ''}
             </p>
-            <p className="text-cream/50 text-xs hidden sm:block">
-              Trié par <span className="text-cream/80">{SORT_LABELS[sort]}</span>
+            <p className="text-maison-cacao/50 text-xs hidden sm:block">
+              Trié par <span className="text-maison-cacao/80">{SORT_LABELS[sort]}</span>
             </p>
           </div>
 
           {filtered.length > 0 ? (
             <AnimateSection>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 xl:grid-cols-3 xl:gap-10">
                 {filtered.map((p) => (
                   <div key={p.id} className="section-animate-item">
-                    <ProductCard
+                    <MaisonProductCard
                       product={{
                         id: p.id,
                         name: p.name,
-                        price: `${p.price} €`,
-                        category: getCategoryById(p.categoryId)?.name ?? 'Article',
+                        price: p.price,
+                        categoryLabel: getCategoryById(p.categoryId)?.name ?? 'Maison Taskmout',
                         image: p.image,
                         stock: p.stock,
+                        description: p.description,
                       }}
                     />
                   </div>
@@ -241,23 +242,23 @@ export default function ArticlesPage() {
               </div>
             </AnimateSection>
           ) : (
-            <div className="rounded-3xl border border-dashed border-white/15 bg-white/5 p-10 sm:p-14 text-center">
-              <div className="mx-auto w-16 h-16 rounded-2xl bg-argan-500/10 border border-argan-400/25 flex items-center justify-center text-argan-300 mb-4">
+            <div className="rounded-sm border border-dashed border-maison-brun/20 bg-white p-10 text-center shadow-card sm:p-14">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-sm border border-maison-brun/15 bg-maison-sable/40 text-maison-brun">
                 <Search className="w-7 h-7" />
               </div>
-              <h2 className="font-display text-xl sm:text-2xl text-cream">Aucun produit ne correspond</h2>
-              <p className="mt-2 text-cream/70 max-w-md mx-auto">
+              <h2 className="font-display text-xl text-maison-cacao sm:text-2xl">Aucun produit ne correspond</h2>
+              <p className="mx-auto mt-2 max-w-md text-maison-cacao/70">
                 {hasActiveFilter
                   ? 'Essayez de retirer un filtre ou de modifier votre recherche.'
                   : 'La gamme est en cours de mise à jour. Revenez bientôt !'}
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 {hasActiveFilter && (
-                  <button type="button" onClick={resetFilters} className="btn-outline border-argan-400/70 text-cream/90 hover:bg-white/10">
+                  <button type="button" onClick={resetFilters} className="btn-maison-outline px-8 !w-auto">
                     Réinitialiser les filtres
                   </button>
                 )}
-                <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
+                <Link href="/contact" className="btn-maison-primary !inline-flex !w-auto items-center gap-2 px-8">
                   Nous contacter
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -268,13 +269,13 @@ export default function ArticlesPage() {
       </section>
 
       {/* CTA bas — savoir-plus / contact */}
-      <section className="py-16 sm:py-24 border-t border-white/10 bg-[#111111]">
+      <section className="border-t border-maison-brun/10 bg-white py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <AnimateSection>
-            <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+            <h2 className="section-animate font-display text-2xl font-semibold tracking-tight text-maison-cacao sm:text-3xl md:text-4xl">
               Besoin d&apos;un coffret sur-mesure&nbsp;?
             </h2>
-            <p className="section-animate mt-4 text-cream/80 max-w-2xl mx-auto">
+            <p className="section-animate mx-auto mt-4 max-w-2xl text-maison-cacao/80">
               Nous composons aussi des coffrets personnalisés selon vos goûts et le nombre de personnes.
             </p>
             <div className="section-animate-item mt-8 flex flex-wrap justify-center gap-3">
@@ -282,7 +283,7 @@ export default function ArticlesPage() {
                 Demander un coffret
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/savoir-plus" className="btn-outline inline-flex items-center gap-2 border-argan-400/70 text-cream/90 hover:bg-white/10">
+              <Link href="/savoir-plus" className="btn-maison-outline inline-flex !w-auto items-center gap-2 px-8">
                 Voir bienfaits & recettes
               </Link>
             </div>

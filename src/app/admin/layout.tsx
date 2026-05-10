@@ -13,6 +13,8 @@ import {
   Droplets,
 } from 'lucide-react';
 
+import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
+
 const nav = [
   { label: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
   { label: 'Commandes', href: '/admin/commandes', icon: ShoppingCart },
@@ -20,13 +22,6 @@ const nav = [
   { label: 'Stocks', href: '/admin/stocks', icon: Layers },
   { label: 'Catégories', href: '/admin/categories', icon: FolderTree },
 ];
-
-const ADMIN_SESSION_KEY = 'taskmout_admin';
-
-function getAdminPassword(): string {
-  if (typeof window === 'undefined') return '';
-  return process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'taskmout';
-}
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();

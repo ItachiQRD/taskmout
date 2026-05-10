@@ -58,3 +58,8 @@ next-env.d.ts
 # Misc
 .cache/
 *.local
+
+# Persistance locale des commandes et catalogue (serveur Node)
+/data/order-store.json
+/data/catalog.json
+

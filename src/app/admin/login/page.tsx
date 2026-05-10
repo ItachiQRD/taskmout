@@ -6,12 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Eye, EyeOff, Lock, ShieldCheck, ArrowLeft, Loader2, Check } from 'lucide-react';
 
-const ADMIN_SESSION_KEY = 'taskmout_admin';
-
-function getAdminPassword(): string {
-  if (typeof window === 'undefined') return '';
-  return process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'taskmout';
-}
+import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
 
 type Status = 'idle' | 'loading' | 'success';
 

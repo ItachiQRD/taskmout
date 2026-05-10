@@ -1,18 +1,20 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, DM_Sans, Amiri } from 'next/font/google';
+import { Cormorant_Garamond, Inter, Amiri } from 'next/font/google';
 import './globals.css';
 import { StoreProvider } from '@/context/StoreContext';
+import { CartProvider } from '@/context/CartContext';
 import { ConditionalLayout } from '@/components/ConditionalLayout';
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-cormorant',
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-inter',
   display: 'swap',
 });
 
@@ -26,8 +28,8 @@ const amiri = Amiri({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://taskmout.fr'),
   title: {
-    default: 'Taskmout — Huiles & saveurs du Maroc',
-    template: '%s | Taskmout',
+    default: 'Maison Taskmout — L’or liquide du Maroc',
+    template: '%s | Maison Taskmout',
   },
   description:
     "Huile d'argan, d'olive et huiles précieuses, amlou, miel et produits artisanaux du Maroc. Pression à froid, recettes familiales, livraison France.",
@@ -41,20 +43,20 @@ export const metadata: Metadata = {
     'Taskmout',
     'Reims',
   ],
-  authors: [{ name: 'Taskmout' }],
-  creator: 'Taskmout',
+  authors: [{ name: 'Maison Taskmout' }],
+  creator: 'Maison Taskmout',
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: '/',
-    title: 'Taskmout — Huiles & saveurs du Maroc',
+    title: 'Maison Taskmout — Huiles & saveurs du Maroc',
     description:
       "Huile d'argan, d'olive et huiles précieuses, amlou, miel et produits artisanaux du Maroc. Pression à froid, recettes familiales.",
-    siteName: 'Taskmout',
+    siteName: 'Maison Taskmout',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Taskmout — Huiles & saveurs du Maroc',
+    title: 'Maison Taskmout — Huiles & saveurs du Maroc',
     description:
       "Huiles, amlou et miel du Maroc. Pression à froid, recettes familiales.",
   },
@@ -74,10 +76,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${playfair.variable} ${dmSans.variable} ${amiri.variable}`}>
-      <body className="relative min-h-screen flex flex-col">
+    <html lang="fr" className={`${cormorant.variable} ${inter.variable} ${amiri.variable}`}>
+      <body className="relative min-h-screen flex flex-col bg-maison-creme text-maison-cacao font-body antialiased">
         <StoreProvider>
-          <ConditionalLayout>{children}</ConditionalLayout>
+          <CartProvider>
+            <ConditionalLayout>{children}</ConditionalLayout>
+          </CartProvider>
         </StoreProvider>
       </body>
     </html>

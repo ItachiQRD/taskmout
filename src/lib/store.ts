@@ -6,17 +6,20 @@ const STORAGE_KEYS = {
   orders: 'taskmout_orders',
 } as const;
 
-const defaultCategories: Category[] = [
+export const SEED_CATEGORIES: Category[] = [
   { id: 'cat-1', name: 'Huiles', slug: 'huiles', order: 0 },
   { id: 'cat-2', name: 'Amlou & tartinables', slug: 'amlou', order: 1 },
   { id: 'cat-3', name: 'Beurres', slug: 'beurres', order: 2 },
 ];
 
-const defaultProducts: Product[] = [
+export const SEED_PRODUCTS: Product[] = [
   { id: '1', name: 'Huile d\'argan pure', slug: 'huile-argan-pure', description: 'Huile d\'argan 100 % pure.', price: '24,90', categoryId: 'cat-1', stock: 50, image: null, active: true, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
   { id: '2', name: 'Huile d\'olive extra vierge', slug: 'huile-olive', description: 'Huile d\'olive extra vierge.', price: '18,90', categoryId: 'cat-1', stock: 40, image: null, active: true, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
   { id: '3', name: 'Amlou — pâte à tartiner', slug: 'amlou', description: 'Pâte à tartiner amlou.', price: '14,90', categoryId: 'cat-2', stock: 30, image: null, active: true, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() },
 ];
+
+const defaultCategories = SEED_CATEGORIES;
+const defaultProducts = SEED_PRODUCTS;
 
 function loadJson<T>(key: string, fallback: T): T {
   if (typeof window === 'undefined') return fallback;

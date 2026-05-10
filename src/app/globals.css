@@ -12,11 +12,11 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+    scroll-padding-top: calc(7.5rem + env(safe-area-inset-top, 0px));
   }
 
   body {
-    @apply bg-[#1a1a1a] text-cream/95 font-body antialiased;
+    @apply bg-maison-creme text-maison-cacao font-body antialiased;
   }
 
   /* Cibles tactiles larges, lisibilité */
@@ -29,7 +29,7 @@
 
   /* Focus visible pour accessibilité */
   *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-argan-500;
+    @apply outline-2 outline-offset-2 outline-maison-brun;
   }
 }
 
@@ -202,13 +202,37 @@
 }
 
 /* Outline CTA sur fond sombre (évite text-argan-700 du .btn-outline par défaut) */
-.btn-outline-dark {
+  .btn-outline-dark {
   @apply inline-flex items-center justify-center gap-2 rounded-2xl font-medium transition-all duration-200
          min-h-[48px] px-6 py-3 text-base
          border-2 border-argan-400/70 text-cream bg-transparent
          hover:bg-white/10 hover:border-argan-300 active:scale-[0.98]
          focus:outline-none focus-visible:ring-2 focus-visible:ring-argan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a];
 }
+
+  /* Charte Maison Taskmout — boutique claire */
+  .btn-maison-primary {
+    @apply inline-flex items-center justify-center gap-2 min-h-[48px] w-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em]
+           bg-maison-brun text-white border border-maison-brun rounded-sm
+           transition-colors duration-200 hover:bg-maison-cacao hover:border-maison-cacao
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-maison-brun focus-visible:ring-offset-2 focus-visible:ring-offset-maison-creme
+           disabled:opacity-45 disabled:pointer-events-none;
+  }
+
+  .btn-maison-outline {
+    @apply inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em]
+           bg-transparent text-maison-brun border border-maison-brun rounded-sm
+           transition-colors duration-200 hover:bg-maison-brun/10
+           focus:outline-none focus-visible:ring-2 focus-visible:ring-maison-brun focus-visible:ring-offset-2 focus-visible:ring-offset-maison-creme;
+  }
+
+  .btn-maison-secondary {
+    @apply btn-maison-outline;
+  }
+
+  .card-maison {
+    @apply bg-white border border-maison-brun/10 shadow-maison transition-shadow duration-300 hover:shadow-soft;
+  }
 
 /* Section dashboard « premium » (savoir-plus) */
 .tm-dashboard-wrap {
@@ -262,7 +286,7 @@
 }
 
 .tm-dashboard-brandText {
-  font-family: var(--font-amiri), Georgia, serif;
+  font-family: var(--font-cormorant), Georgia, serif;
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 0.02em;
@@ -339,7 +363,7 @@
 }
 
 .tm-dashboard-card__title {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 800;
   letter-spacing: 0.14em;
   font-size: 12px;
@@ -489,8 +513,8 @@
   top: -100px;
   z-index: 200;
   translate: -50% 0;
-  border-radius: 0.875rem;
-  background-color: rgb(214 139 42 / 1);
+  border-radius: 0.125rem;
+  background-color: #5a3825;
   padding: 0.65rem 1.15rem;
   font-weight: 600;
   font-size: 0.875rem;
@@ -502,15 +526,15 @@
 .skip-to-content:focus {
   top: calc(5.5rem + env(safe-area-inset-top, 0px));
   box-shadow:
-    0 0 0 2px rgb(252 252 249),
-    0 14px 32px rgb(0 0 0 / 0.45);
+    0 0 0 2px #f5efe7,
+    0 14px 32px rgb(27 23 20 / 0.35);
 }
 
 .skip-to-content:focus-visible {
   top: calc(5.5rem + env(safe-area-inset-top, 0px));
   box-shadow:
-    0 0 0 2px rgb(252 252 249),
-    0 14px 32px rgb(0 0 0 / 0.45);
+    0 0 0 2px #f5efe7,
+    0 14px 32px rgb(27 23 20 / 0.35);
 }
 
 /* Réduction des animations si préféré */

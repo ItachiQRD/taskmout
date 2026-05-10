@@ -1,12 +1,31 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { useStore } from '@/context/StoreContext';
+import { readAdminSessionToken } from '@/lib/admin-client';
 import { Package, ShoppingCart, Layers, ArrowRight } from 'lucide-react';
 
 export default function AdminDashboardPage() {
-  const { orders, products, categories } = useStore();
-  const pendingOrders = orders.filter((o) => o.status === 'pending' || o.status === 'paid');
+  const { products, categories } = useStore();
+  const [serverOrderCount, setServerOrderCount] = useState<number | null>(null);
+  const [pendingServer, setPendingServer] = useState<number | null>(null);
+
+  useEffect(() => {
+    const token = readAdminSessionToken();
+    if (!token) return;
+    fetch('/api/orders', { headers: { 'x-admin-token': token } })
+      .then((r) => r.json())
+      .then((d: { orders?: { status: string }[] }) => {
+        const list = d.orders ?? [];
+        setServerOrderCount(list.length);
+        setPendingServer(list.filter((o) => o.status === 'pending' || o.status === 'paid').length);
+      })
+      .catch(() => {
+        setServerOrderCount(0);
+        setPendingServer(0);
+      });
+  }, []);
   const lowStock = products.filter((p) => p.stock < 10 && p.active);
 
   return (
@@ -19,7 +38,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-ink/70">Commandes</p>
-              <p className="text-2xl font-semibold text-ink mt-1">{orders.length}</p>
+              <p className="text-2xl font-semibold text-ink mt-1">{serverOrderCount ?? '—'}</p>
             </div>
             <div className="w-12 h-12 rounded-2xl bg-argan-100 flex items-center justify-center">
               <ShoppingCart className="w-6 h-6 text-argan-600" />
@@ -34,7 +53,7 @@ export default function AdminDashboardPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-ink/70">À traiter</p>
-              <p className="text-2xl font-semibold text-ink mt-1">{pendingOrders.length}</p>
+              <p className="text-2xl font-semibold text-ink mt-1">{pendingServer ?? '—'}</p>
             </div>
           </div>
         </div>

@@ -9,7 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Palette Maroc — chaleur, huiles, nature
+        maison: {
+          creme: '#F5EFE7',
+          sable: '#DBC3A5',
+          brun: '#5A3825',
+          cacao: '#1B1714',
+          olive: '#5A6650',
+          terre: '#A56A43',
+          dore: '#CBA26A',
+        },
         argan: {
           50: '#fdf8f0',
           100: '#f9ecd6',
@@ -46,22 +54,23 @@ const config: Config = {
         ink: '#2c261f',
       },
       fontFamily: {
-        display: ['var(--font-playfair)', 'Georgia', 'serif'],
+        display: ['var(--font-cormorant)', 'Georgia', 'serif'],
         oriental: ['var(--font-amiri)', 'Georgia', 'serif'],
-        body: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        body: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'hero': ['clamp(2.5rem, 6vw, 4rem)', { lineHeight: '1.15' }],
-        'intro': ['clamp(1.125rem, 2vw, 1.35rem)', { lineHeight: '1.6' }],
+        hero: ['clamp(2.5rem, 6vw, 4rem)', { lineHeight: '1.15' }],
+        intro: ['clamp(1.125rem, 2vw, 1.35rem)', { lineHeight: '1.6' }],
       },
       borderRadius: {
         '2xl': '1rem',
         '3xl': '1.5rem',
       },
       boxShadow: {
-        'soft': '0 4px 24px -4px rgba(44, 38, 31, 0.08)',
-        'warm': '0 8px 32px -8px rgba(214, 139, 42, 0.2)',
-        'card': '0 2px 12px rgba(44, 38, 31, 0.06)',
+        soft: '0 4px 24px -4px rgba(27, 23, 20, 0.08)',
+        warm: '0 8px 32px -8px rgba(90, 56, 37, 0.18)',
+        card: '0 2px 12px rgba(27, 23, 20, 0.06)',
+        maison: '0 12px 40px -16px rgba(90, 56, 37, 0.12)',
       },
       keyframes: {
         'scroll-text': {
