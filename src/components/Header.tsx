@@ -159,7 +159,7 @@ export function Header() {
                     {/* Dropdown */}
                     {hasChildren && isOpen && (
                       <div className="absolute left-0 top-full pt-1">
-                        <ul className="min-w-[200px] rounded-sm border border-maison-brun/10 bg-white py-2 shadow-maison">
+                        <ul className="min-w-[200px] rounded-xl border border-maison-brun/10 bg-white py-2 shadow-maison">
                           {item.children!.map((child) => (
                             <li key={child.href}>
                               <Link

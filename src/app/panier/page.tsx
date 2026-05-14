@@ -55,7 +55,7 @@ export default function PanierPage() {
             <ArrowLeft className="w-5 h-5" aria-hidden />
             Continuer mes achats
           </Link>
-          <div className="rounded-sm border border-maison-brun/10 bg-white p-8 text-center shadow-card">
+          <div className="rounded-2xl border border-maison-brun/10 bg-white p-8 text-center shadow-card">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-maison-sable/40 text-maison-brun mb-6">
               <ShoppingBag className="w-10 h-10" aria-hidden />
             </div>
@@ -84,15 +84,15 @@ export default function PanierPage() {
         <h1 className="font-display text-2xl sm:text-3xl font-semibold text-maison-cacao">Panier</h1>
 
         {hasUnknown && (
-          <p className="mt-3 rounded-sm border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <p className="mt-3 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
             Certains articles ne sont plus au catalogue ou ont été désactivés. Retirez-les avant de payer.
           </p>
         )}
 
         <ul className="mt-8 space-y-4">
           {resolved.map(({ line, label, unit, image, lineTotal }) => (
-            <li key={line.productId} className="flex flex-col gap-4 rounded-sm border border-maison-brun/10 bg-white p-4 shadow-card sm:flex-row sm:items-center">
-              <div className="relative aspect-square w-full max-w-[5.5rem] shrink-0 overflow-hidden rounded-sm bg-maison-sable/30">
+            <li key={line.productId} className="flex flex-col gap-4 rounded-2xl border border-maison-brun/10 bg-white p-4 shadow-card sm:flex-row sm:items-center">
+              <div className="relative aspect-square w-full max-w-[5.5rem] shrink-0 overflow-hidden rounded-2xl bg-maison-sable/30">
                 {image ? (
                   <Image src={image} alt="" fill className="object-cover" sizes="96px" />
                 ) : (
@@ -108,11 +108,11 @@ export default function PanierPage() {
                 </p>
               </div>
               <div className="flex items-center gap-3 sm:flex-col sm:items-end">
-                <div className="flex items-center gap-1 rounded-sm border border-maison-brun/10 p-1">
+                <div className="flex items-center gap-1 rounded-2xl border border-maison-brun/10 p-1">
                   <button
                     type="button"
                     aria-label="Diminuer"
-                    className="flex size-9 items-center justify-center rounded-sm hover:bg-maison-sable/30"
+                    className="flex size-9 items-center justify-center rounded-2xl hover:bg-maison-sable/30"
                     onClick={() => setQuantity(line.productId, line.quantity - 1)}
                   >
                     <Minus className="size-4" aria-hidden />
@@ -121,7 +121,7 @@ export default function PanierPage() {
                   <button
                     type="button"
                     aria-label="Augmenter"
-                    className="flex size-9 items-center justify-center rounded-sm hover:bg-maison-sable/30"
+                    className="flex size-9 items-center justify-center rounded-2xl hover:bg-maison-sable/30"
                     onClick={() => setQuantity(line.productId, line.quantity + 1)}
                   >
                     <Plus className="size-4" aria-hidden />
@@ -143,7 +143,7 @@ export default function PanierPage() {
           ))}
         </ul>
 
-        <div className="mt-10 rounded-sm border border-maison-brun/10 bg-white px-6 py-5 shadow-card">
+        <div className="mt-10 rounded-2xl border border-maison-brun/10 bg-white px-6 py-5 shadow-card">
           <div className="flex items-center justify-between text-lg font-semibold text-maison-cacao">
             <span>Total TTC</span>
             <span>{grandTotal.toFixed(2).replace('.', ',')} €</span>

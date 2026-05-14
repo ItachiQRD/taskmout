@@ -39,7 +39,7 @@ const BIENFAITS_CORPS = [
 
 function BienfaitCard({ title, icon, description }: { title: string; icon: string; description: string }) {
   return (
-    <div className="group h-full p-5 sm:p-6 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-0.5">
+    <div className="group h-full p-5 sm:p-6 rounded-2xl bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-0.5">
       <div className="flex items-center gap-3">
         <span className="text-xl" aria-hidden>{icon}</span>
         <h3 className="font-display text-lg sm:text-xl text-maison-brun">{title}</h3>
@@ -149,7 +149,7 @@ export default function SavoirPlusPage() {
                   </a>
                 </div>
               </div>
-              <div className="section-animate-item relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 shadow-maison">
+              <div className="section-animate-item relative aspect-[4/3] rounded-2xl overflow-hidden border border-maison-brun/10 shadow-maison">
                 <Image
                   src={IMG('coffret-produits.png')}
                   alt="Coffret huiles, amlou et miel Taskmout"
@@ -165,10 +165,10 @@ export default function SavoirPlusPage() {
 
         {/* Quick nav — mobile */}
         <div className="md:hidden mt-8 px-4">
-          <div className="mx-auto max-w-5xl rounded-sm border border-maison-brun/10 bg-maison-creme p-2">
+          <div className="mx-auto max-w-5xl rounded-2xl border border-maison-brun/10 bg-maison-creme p-2">
             <div className="grid grid-cols-2 gap-2">
               {NAV_SECTIONS.map((s) => (
-                <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-white px-3 text-xs font-medium text-maison-cacao/90 border border-maison-brun/8 transition-colors hover:bg-maison-sable/30">
+                <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-[44px] items-center justify-center rounded-2xl bg-white px-3 text-xs font-medium text-maison-cacao/90 border border-maison-brun/8 transition-colors hover:bg-maison-sable/30">
                   {s.label}
                 </a>
               ))}
@@ -187,7 +187,7 @@ export default function SavoirPlusPage() {
                 <a
                   key={s.id}
                   href={`#${s.id}`}
-                  className="block rounded-sm px-3 py-2 text-sm text-maison-cacao/70 hover:text-maison-brun hover:bg-maison-sable/30 transition-colors"
+                  className="block rounded-2xl px-3 py-2 text-sm text-maison-cacao/70 hover:text-maison-brun hover:bg-maison-sable/30 transition-colors"
                 >
                   {s.label}
                 </a>
@@ -211,8 +211,8 @@ export default function SavoirPlusPage() {
                   {PRODUITS.map((p) => {
                     const Icon = p.icon;
                     return (
-                      <div key={p.name} className={`section-animate-item flex gap-4 p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 border-l-4 ${p.borderColor} shadow-card transition-all duration-300 hover:border-maison-brun/20 hover:-translate-y-0.5`}>
-                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-sm overflow-hidden bg-maison-sable/30">
+                      <div key={p.name} className={`section-animate-item flex gap-4 p-4 sm:p-5 rounded-2xl bg-white border border-maison-brun/10 border-l-4 ${p.borderColor} shadow-card transition-all duration-300 hover:border-maison-brun/20 hover:-translate-y-0.5`}>
+                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-2xl overflow-hidden bg-maison-sable/30">
                           <Image src={p.image} alt={p.alt} fill className="object-cover" sizes="96px" />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -227,7 +227,7 @@ export default function SavoirPlusPage() {
                   })}
                 </div>
 
-                <div className="section-animate-item mt-4 p-5 rounded-sm bg-maison-sable/25 border border-maison-brun/8 text-center">
+                <div className="section-animate-item mt-4 p-5 rounded-2xl bg-maison-sable/25 border border-maison-brun/8 text-center">
                   <p className="text-sm text-maison-cacao/70">
                     Selon la saison : noix, amande et autres fruits à coque. Même exigence : origine claire et pression à froid.
                   </p>
@@ -253,7 +253,7 @@ export default function SavoirPlusPage() {
                 </p>
 
                 <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
-                  <div className="section-animate-item relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-maison-sable/30 border border-maison-brun/10 shadow-soft max-w-md">
+                  <div className="section-animate-item relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-maison-sable/30 border border-maison-brun/10 shadow-soft max-w-md">
                     <Image src={IMG('coffret-produits.png')} alt="Coffret huiles, amlou et miel Taskmout" fill className="object-cover" sizes="(max-width: 768px) 100vw, 480px" />
                     <div className="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-transparent pointer-events-none" />
                   </div>
@@ -264,7 +264,7 @@ export default function SavoirPlusPage() {
                       'Finition de plats chauds pour préserver les nutriments.',
                       'Base pour vinaigrettes maison et marinades.',
                     ].map((text, i) => (
-                      <div key={i} className="flex gap-3 items-start p-3.5 rounded-sm bg-white border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/20">
+                      <div key={i} className="flex gap-3 items-start p-3.5 rounded-2xl bg-white border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/20">
                         <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-maison-sable/40 text-xs font-bold text-maison-brun">{i + 1}</span>
                         <span className="text-sm text-maison-cacao/85 leading-relaxed">{text}</span>
                       </div>
@@ -321,7 +321,7 @@ export default function SavoirPlusPage() {
             {/* CTA */}
             <section className="py-14 sm:py-20">
               <AnimateSection>
-                <div className="section-animate rounded-sm border border-maison-brun/10 bg-white p-8 sm:p-10 text-center shadow-card">
+                <div className="section-animate rounded-2xl border border-maison-brun/10 bg-white p-8 sm:p-10 text-center shadow-card">
                   <h2 className="font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
                     Envie d&apos;essayer ?
                   </h2>

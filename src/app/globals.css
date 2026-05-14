@@ -213,7 +213,7 @@
   /* Charte Maison Taskmout — boutique claire */
   .btn-maison-primary {
     @apply inline-flex items-center justify-center gap-2 min-h-[48px] w-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em]
-           bg-maison-brun text-white border border-maison-brun rounded-sm
+           bg-maison-brun text-white border border-maison-brun rounded-2xl
            transition-colors duration-200 hover:bg-maison-cacao hover:border-maison-cacao
            focus:outline-none focus-visible:ring-2 focus-visible:ring-maison-brun focus-visible:ring-offset-2 focus-visible:ring-offset-maison-creme
            disabled:opacity-45 disabled:pointer-events-none;
@@ -221,7 +221,7 @@
 
   .btn-maison-outline {
     @apply inline-flex items-center justify-center gap-2 min-h-[48px] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em]
-           bg-transparent text-maison-brun border border-maison-brun rounded-sm
+           bg-transparent text-maison-brun border border-maison-brun rounded-2xl
            transition-colors duration-200 hover:bg-maison-brun/10
            focus:outline-none focus-visible:ring-2 focus-visible:ring-maison-brun focus-visible:ring-offset-2 focus-visible:ring-offset-maison-creme;
   }

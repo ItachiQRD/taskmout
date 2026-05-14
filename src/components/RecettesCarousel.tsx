@@ -37,7 +37,7 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
   return (
     <div className="w-full">
       {/* Carousel image + navigation */}
-      <div className="relative rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/20 touch-pan-y shadow-soft">
+      <div className="relative rounded-2xl overflow-hidden border border-maison-brun/10 bg-maison-sable/20 touch-pan-y shadow-soft">
         <div className="relative w-full aspect-[4/3] sm:aspect-[16/10] max-h-[320px] sm:max-h-[420px] md:max-h-[520px]">
           {recettes.map((slide, i) => (
             <div
@@ -110,14 +110,14 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
           <button
             type="button"
             onClick={() => setDesktopDetailsOpen((v) => !v)}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-sm border border-maison-brun/15 bg-white px-4 py-3 text-sm font-medium text-maison-cacao hover:bg-maison-sable/30 transition-colors shadow-card"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-maison-brun/15 bg-white px-4 py-3 text-sm font-medium text-maison-cacao hover:bg-maison-sable/30 transition-colors shadow-card"
             aria-expanded={desktopDetailsOpen}
           >
             <BookOpen className="size-4 text-maison-brun" aria-hidden />
             {desktopDetailsOpen ? 'Masquer la recette' : `Voir la recette : ${r.title}`}
           </button>
           {desktopDetailsOpen && (
-            <div className="mt-3 rounded-sm border border-maison-brun/10 bg-white p-6 shadow-card">
+            <div className="mt-3 rounded-2xl border border-maison-brun/10 bg-white p-6 shadow-card">
               <h4 className="font-display text-lg text-maison-brun">{r.title}</h4>
               <p className="mt-3 text-sm text-maison-cacao/80 leading-relaxed whitespace-pre-line">
                 {r.detailsDesktop ?? r.description}
@@ -131,14 +131,14 @@ export function RecettesCarousel({ recettes }: RecettesCarouselProps) {
           <button
             type="button"
             onClick={() => setShowMobileDetails((v) => !v)}
-            className="w-full inline-flex items-center justify-center gap-2 rounded-sm border border-maison-brun/15 bg-white px-4 py-3 text-sm font-medium text-maison-cacao/90 hover:bg-maison-sable/30 transition-colors shadow-card"
+            className="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-maison-brun/15 bg-white px-4 py-3 text-sm font-medium text-maison-cacao/90 hover:bg-maison-sable/30 transition-colors shadow-card"
             aria-expanded={showMobileDetails}
           >
             <BookOpen className="size-4 text-maison-brun" aria-hidden />
             {showMobileDetails ? 'Masquer les détails' : 'Voir les détails de la recette'}
           </button>
           {showMobileDetails && (
-            <div className="mt-3 rounded-sm border border-maison-brun/10 bg-white p-4 shadow-card">
+            <div className="mt-3 rounded-2xl border border-maison-brun/10 bg-white p-4 shadow-card">
               <h4 className="font-display text-base text-maison-brun">{r.title}</h4>
               <p className="mt-2 text-sm text-maison-cacao/80 leading-relaxed whitespace-pre-line">
                 {r.detailsDesktop ?? r.description}

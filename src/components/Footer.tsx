@@ -30,7 +30,7 @@ export function Footer() {
             const Icon = item.icon;
             return (
               <div key={item.title} className="flex gap-3">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-sm border border-white/20 bg-white/10">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10">
                   <Icon className="size-5 text-maison-dore" aria-hidden />
                 </span>
                 <div>

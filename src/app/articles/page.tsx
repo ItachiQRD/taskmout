@@ -242,8 +242,8 @@ export default function ArticlesPage() {
               </div>
             </AnimateSection>
           ) : (
-            <div className="rounded-sm border border-dashed border-maison-brun/20 bg-white p-10 text-center shadow-card sm:p-14">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-sm border border-maison-brun/15 bg-maison-sable/40 text-maison-brun">
+            <div className="rounded-2xl border border-dashed border-maison-brun/20 bg-white p-10 text-center shadow-card sm:p-14">
+              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-maison-brun/15 bg-maison-sable/40 text-maison-brun">
                 <Search className="w-7 h-7" />
               </div>
               <h2 className="font-display text-xl text-maison-cacao sm:text-2xl">Aucun produit ne correspond</h2>

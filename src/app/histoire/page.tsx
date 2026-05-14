@@ -121,7 +121,7 @@ export default function HistoirePage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-              <div className="section-animate-item relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30">
+              <div className="section-animate-item relative aspect-[4/3] rounded-2xl overflow-hidden border border-maison-brun/10 bg-maison-sable/30">
                 <Image
                   src={IMG('origines-cuisine-famille.png')}
                   alt="Cuisine familiale marocaine — origines Taskmout"
@@ -212,7 +212,7 @@ export default function HistoirePage() {
 
                       {/* Image */}
                       <div className={`mt-6 md:mt-0 ${isLeft ? 'md:order-2' : 'md:order-1'}`}>
-                        <div className="relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison">
+                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison">
                           <Image
                             src={IMG(step.image)}
                             alt={step.alt}
@@ -276,7 +276,7 @@ export default function HistoirePage() {
               </div>
 
               {/* Mosaïque : style initial restauré (le souci venait du fichier source) */}
-              <div className="section-animate-item relative w-full rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison aspect-[762/571]">
+              <div className="section-animate-item relative w-full rounded-2xl overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison aspect-[762/571]">
                 <Image
                   src={IMG('savoir-faire-mosaic.png')}
                   alt="Mosaïque savoir-faire Taskmout — amandons, olives, miel, amlou"
@@ -322,7 +322,7 @@ export default function HistoirePage() {
                 return (
                   <div
                     key={v.title}
-                    className="section-animate-item group relative p-6 rounded-sm bg-maison-sable/30 border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-1"
+                    className="section-animate-item group relative p-6 rounded-2xl bg-maison-sable/30 border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-1"
                   >
                     <div className="w-12 h-12 rounded-xl bg-maison-sable/40 border border-maison-brun/15 flex items-center justify-center text-maison-brun group-hover:bg-maison-sable/50 transition-colors">
                       <Icon className="w-6 h-6" />

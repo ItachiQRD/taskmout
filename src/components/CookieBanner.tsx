@@ -53,10 +53,10 @@ export function CookieBanner() {
       aria-label="Bandeau de gestion des cookies"
       className="fixed inset-x-0 bottom-0 z-[60] p-3 sm:p-4"
     >
-      <div className="mx-auto max-w-4xl rounded-sm border border-maison-brun/15 bg-maison-creme shadow-[0_30px_80px_-20px_rgba(27,23,20,0.35)]">
+      <div className="mx-auto max-w-4xl rounded-2xl border border-maison-brun/15 bg-maison-creme shadow-[0_30px_80px_-20px_rgba(27,23,20,0.35)]">
         <div className="p-5 sm:p-6">
           <div className="flex items-start gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-maison-brun/20 bg-maison-sable/40 text-maison-brun">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-maison-brun/20 bg-maison-sable/40 text-maison-brun">
               <Cookie className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -78,7 +78,7 @@ export function CookieBanner() {
 
               {showDetails && (
                 <div className="mt-4 space-y-2">
-                  <label className="flex items-start gap-3 rounded-sm border border-maison-brun/15 bg-maison-sable/30 p-3">
+                  <label className="flex items-start gap-3 rounded-2xl border border-maison-brun/15 bg-maison-sable/30 p-3">
                     <input type="checkbox" checked disabled className="mt-1 h-4 w-4 accent-maison-brun" />
                     <div>
                       <p className="text-sm font-medium text-maison-cacao">Cookies essentiels</p>
@@ -88,7 +88,7 @@ export function CookieBanner() {
                       </p>
                     </div>
                   </label>
-                  <label className="flex cursor-pointer items-start gap-3 rounded-sm border border-maison-brun/15 bg-maison-sable/30 p-3">
+                  <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-maison-brun/15 bg-maison-sable/30 p-3">
                     <input
                       type="checkbox"
                       checked={analytics}

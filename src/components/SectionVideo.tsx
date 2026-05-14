@@ -79,7 +79,7 @@ export function SectionVideo({
             <div className="section-animate flex justify-center md:justify-end">
               <div className="relative w-full max-w-[520px] sm:max-w-[580px] md:max-w-[640px]">
                 <div
-                  className="relative rounded-sm p-3 sm:p-4"
+                  className="relative rounded-2xl p-3 sm:p-4"
                   style={{
                     background: 'linear-gradient(135deg, rgba(90,56,37,0.08) 0%, transparent 40%, transparent 60%, rgba(90,102,80,0.06) 100%)',
                     border: '1px solid rgba(90,56,37,0.18)',
@@ -91,7 +91,7 @@ export function SectionVideo({
                   <span className="absolute bottom-2 right-2 rotate-180" aria-hidden><CornerOrnament /></span>
                   <span className="absolute bottom-2 left-2 -rotate-90" aria-hidden><CornerOrnament /></span>
 
-                  <div className="relative rounded-sm overflow-hidden bg-maison-sable/30">
+                  <div className="relative rounded-2xl overflow-hidden bg-maison-sable/30">
                     <video
                       src={videoSrc}
                       className="relative z-0 w-full h-auto max-h-[400px] sm:max-h-[460px] md:max-h-[520px] object-contain"

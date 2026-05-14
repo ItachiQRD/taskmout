@@ -25,7 +25,7 @@ export function MaisonProductCard({ product }: { product: MaisonProduct }) {
       {/* Image */}
       <Link
         href={`/produit/${product.id}`}
-        className="relative aspect-[4/5] overflow-hidden rounded-sm border border-maison-brun/8 bg-maison-sable/25"
+        className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-maison-brun/8 bg-maison-sable/25"
       >
         {product.image ? (
           <Image

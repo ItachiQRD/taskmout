@@ -106,7 +106,7 @@ export default function CommandePaiementPage() {
               id="name"
               autoComplete="name"
               required
-              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
+              className="w-full rounded-2xl border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -120,7 +120,7 @@ export default function CommandePaiementPage() {
               type="email"
               autoComplete="email"
               required
-              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
+              className="w-full rounded-2xl border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -133,7 +133,7 @@ export default function CommandePaiementPage() {
               id="address"
               required
               rows={4}
-              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
+              className="w-full rounded-2xl border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder="Rue, code postal, ville"
@@ -146,14 +146,14 @@ export default function CommandePaiementPage() {
             <textarea
               id="note"
               rows={3}
-              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
+              className="w-full rounded-2xl border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
               value={note}
               onChange={(e) => setNote(e.target.value)}
             />
           </div>
 
           {error ? (
-            <p className="text-sm text-rose-700 bg-rose-50 border border-rose-300 rounded-sm px-4 py-3">{error}</p>
+            <p className="text-sm text-rose-700 bg-rose-50 border border-rose-300 rounded-2xl px-4 py-3">{error}</p>
           ) : null}
 
           <button

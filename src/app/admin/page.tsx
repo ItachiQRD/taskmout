@@ -4,26 +4,31 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useStore } from '@/context/StoreContext';
 import { readAdminSessionToken } from '@/lib/admin-client';
-import { Package, ShoppingCart, Layers, ArrowRight } from 'lucide-react';
+import { Package, ShoppingCart, Layers, ArrowRight, BarChart3 } from 'lucide-react';
+import { parsePriceFr } from '@/lib/price';
 
 export default function AdminDashboardPage() {
   const { products, categories } = useStore();
   const [serverOrderCount, setServerOrderCount] = useState<number | null>(null);
   const [pendingServer, setPendingServer] = useState<number | null>(null);
+  const [revenue, setRevenue] = useState<number | null>(null);
 
   useEffect(() => {
     const token = readAdminSessionToken();
     if (!token) return;
     fetch('/api/orders', { headers: { 'x-admin-token': token } })
       .then((r) => r.json())
-      .then((d: { orders?: { status: string }[] }) => {
+      .then((d: { orders?: { status: string; total: string }[] }) => {
         const list = d.orders ?? [];
         setServerOrderCount(list.length);
         setPendingServer(list.filter((o) => o.status === 'pending' || o.status === 'paid').length);
+        const paidOrders = list.filter((o) => o.status === 'paid' || o.status === 'shipped' || o.status === 'delivered');
+        setRevenue(paidOrders.reduce((sum, o) => sum + parsePriceFr(o.total), 0));
       })
       .catch(() => {
         setServerOrderCount(0);
         setPendingServer(0);
+        setRevenue(0);
       });
   }, []);
   const lowStock = products.filter((p) => p.stock < 10 && p.active);
@@ -33,7 +38,7 @@ export default function AdminDashboardPage() {
       <h1 className="font-display text-2xl sm:text-3xl font-semibold text-ink">Tableau de bord</h1>
       <p className="text-ink/70 mt-1">Vue d'ensemble de votre boutique.</p>
 
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         <div className="card p-6">
           <div className="flex items-center justify-between">
             <div>
@@ -46,6 +51,23 @@ export default function AdminDashboardPage() {
           </div>
           <Link href="/admin/commandes" className="mt-4 flex items-center gap-1 text-argan-600 font-medium text-sm hover:underline">
             Voir tout <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+
+        <div className="card p-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-ink/70">Chiffre d&apos;affaires</p>
+              <p className="text-2xl font-semibold text-ink mt-1">
+                {revenue !== null ? revenue.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) : '—'}
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-2xl bg-emerald-100 flex items-center justify-center">
+              <BarChart3 className="w-6 h-6 text-emerald-600" />
+            </div>
+          </div>
+          <Link href="/admin/comptabilite" className="mt-4 flex items-center gap-1 text-argan-600 font-medium text-sm hover:underline">
+            Comptabilité <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 

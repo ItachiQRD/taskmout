@@ -39,7 +39,7 @@ export default function AdminStocksPage() {
               >
                 −
               </button>
-              <span className={`min-w-[3rem] text-center font-semibold ${p.stock < 10 ? 'text-amber-600' : 'text-ink'}`}>
+              <span className={`min-w-[3rem] text-center font-semibold text-lg ${p.stock < 10 ? 'text-amber-600' : 'text-ink'}`}>
                 {p.stock}
               </span>
               <button
@@ -50,13 +50,6 @@ export default function AdminStocksPage() {
               >
                 +
               </button>
-              <input
-                type="number"
-                min={0}
-                value={p.stock}
-                onChange={(e) => updateProduct(p.id, { stock: Math.max(0, Number(e.target.value)) })}
-                className="w-20 min-h-[44px] px-2 rounded-xl border border-ink/20 text-center focus:border-argan-500"
-              />
             </div>
           </div>
         ))}

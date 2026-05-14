@@ -18,7 +18,7 @@ export function ProductPageClient({ productId }: { productId: string }) {
     return (
       <div className="min-h-[60vh] bg-maison-creme flex items-center">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <div className="inline-flex items-center gap-2 rounded-sm border border-rose-300 bg-rose-50 px-4 py-2 text-rose-700 text-sm">
+          <div className="inline-flex items-center gap-2 rounded-2xl border border-rose-300 bg-rose-50 px-4 py-2 text-rose-700 text-sm">
             Produit introuvable
           </div>
           <h1 className="mt-5 font-display text-3xl sm:text-4xl text-maison-cacao">
@@ -58,7 +58,7 @@ export function ProductPageClient({ productId }: { productId: string }) {
           <div className="mt-8 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
             {/* Image */}
             <div className="lg:col-span-6">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-sm border border-maison-brun/8 bg-maison-sable/25">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-maison-brun/8 bg-maison-sable/25">
                 {product.image ? (
                   <Image
                     src={product.image}
@@ -97,15 +97,15 @@ export function ProductPageClient({ productId }: { productId: string }) {
                 <span className="text-maison-cacao/50 text-sm">TTC</span>
 
                 {outOfStock ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-sm border border-rose-300 bg-rose-50 px-3 py-1 text-xs font-medium text-rose-700">
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl border border-rose-300 bg-rose-50 px-3 py-1 text-xs font-medium text-rose-700">
                     Rupture de stock
                   </span>
                 ) : lowStock ? (
-                  <span className="inline-flex items-center gap-1.5 rounded-sm border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800">
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl border border-amber-300 bg-amber-50 px-3 py-1 text-xs font-medium text-amber-800">
                     Plus que {product.stock} en stock
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 rounded-sm border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
+                  <span className="inline-flex items-center gap-1.5 rounded-2xl border border-emerald-300 bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-800">
                     En stock
                   </span>
                 )}
@@ -120,12 +120,12 @@ export function ProductPageClient({ productId }: { productId: string }) {
               </p>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div className="rounded-sm border border-maison-brun/10 bg-white p-4">
+                <div className="rounded-2xl border border-maison-brun/10 bg-white p-4">
                   <Leaf className="w-5 h-5 text-maison-brun" />
                   <p className="mt-2 text-maison-cacao font-medium">Origine sélectionnée</p>
                   <p className="text-sm text-maison-cacao/65">Ingrédients choisis avec exigence.</p>
                 </div>
-                <div className="rounded-sm border border-maison-brun/10 bg-white p-4">
+                <div className="rounded-2xl border border-maison-brun/10 bg-white p-4">
                   <ShieldCheck className="w-5 h-5 text-maison-brun" />
                   <p className="mt-2 text-maison-cacao font-medium">Qualité contrôlée</p>
                   <p className="text-sm text-maison-cacao/65">Petits lots, suivi régulier.</p>

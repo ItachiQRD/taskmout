@@ -193,7 +193,7 @@ export default function HomePage() {
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
               <div className="relative lg:col-span-6">
-                <div className="section-animate-item relative aspect-[4/3] w-full overflow-hidden rounded-sm border border-maison-brun/15 bg-maison-sable/30 shadow-soft sm:aspect-[5/4] lg:aspect-[16/10]">
+                <div className="section-animate-item relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-maison-brun/15 bg-maison-sable/30 shadow-soft sm:aspect-[5/4] lg:aspect-[16/10]">
                   <Image
                     src={HOME_IMG('atelier-taskmout.png')}
                     alt="Atelier Taskmout — gestes artisanaux"
@@ -205,14 +205,14 @@ export default function HomePage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent" />
                   <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-3">
-                    <div className="rounded-sm border border-maison-brun/25 bg-white/85 backdrop-blur px-4 py-3">
+                    <div className="rounded-2xl border border-maison-brun/25 bg-white/85 backdrop-blur px-4 py-3">
                       <p className="text-[10px] uppercase tracking-widest text-maison-terre">Atelier</p>
                       <p className="font-display text-maison-cacao">Reims, France</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="section-animate-item absolute -bottom-6 -right-3 hidden aspect-square w-32 overflow-hidden rounded-sm border border-maison-brun/15 bg-maison-sable/30 shadow-maison sm:block sm:w-40 sm:-bottom-7 sm:-right-5 md:w-48 lg:w-52 xl:w-56">
+                <div className="section-animate-item absolute -bottom-6 -right-3 hidden aspect-square w-32 overflow-hidden rounded-2xl border border-maison-brun/15 bg-maison-sable/30 shadow-maison sm:block sm:w-40 sm:-bottom-7 sm:-right-5 md:w-48 lg:w-52 xl:w-56">
                   <Image
                     src={HOME_IMG('process-2-pression.png')}
                     alt="Pression artisanale traditionnelle"
@@ -247,7 +247,7 @@ export default function HomePage() {
                     return (
                       <div
                         key={p.title}
-                        className="section-animate-item flex items-start gap-4 rounded-sm border border-maison-brun/10 bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5"
+                        className="section-animate-item flex items-start gap-4 rounded-2xl border border-maison-brun/10 bg-white p-5 shadow-soft transition-all duration-300 hover:-translate-y-0.5"
                       >
                         <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-maison-brun/15 bg-maison-sable/30 text-maison-brun">
                           <Icon className="h-5 w-5" />
@@ -277,7 +277,7 @@ export default function HomePage() {
                 { v: 'À froid', l: 'Pression douce' },
                 { v: '24/7', l: 'Livraison France' },
               ].map((s) => (
-                <div key={s.l} className="section-animate-item rounded-sm border border-maison-brun/10 bg-white p-5 text-center shadow-card">
+                <div key={s.l} className="section-animate-item rounded-2xl border border-maison-brun/10 bg-white p-5 text-center shadow-card">
                   <p className="font-display text-2xl text-maison-cacao sm:text-3xl">{s.v}</p>
                   <p className="mt-1 text-sm text-maison-cacao/70">{s.l}</p>
                 </div>
@@ -311,7 +311,7 @@ export default function HomePage() {
                 <Link
                   key={c.title}
                   href={c.href}
-                  className="section-animate-item group relative overflow-hidden rounded-sm border border-maison-brun/10 bg-maison-sable/20 transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-1 hover:shadow-maison"
+                  className="section-animate-item group relative overflow-hidden rounded-2xl border border-maison-brun/10 bg-maison-sable/20 transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-1 hover:shadow-maison"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden">
                     <Image
@@ -361,7 +361,7 @@ export default function HomePage() {
                       reversed ? 'md:[&>*:first-child]:order-2' : ''
                     }`}
                   >
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-sm border border-maison-brun/15 bg-maison-sable/30 shadow-soft">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-maison-brun/15 bg-maison-sable/30 shadow-soft">
                       <Image
                         src={step.image}
                         alt={step.alt}
@@ -432,7 +432,7 @@ export default function HomePage() {
               {TEMOIGNAGES.map((t) => (
                 <figure
                   key={t.name}
-                  className="section-animate-item relative rounded-sm border border-maison-brun/10 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-soft sm:p-7"
+                  className="section-animate-item relative rounded-2xl border border-maison-brun/10 bg-white p-6 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-soft sm:p-7"
                 >
                   <Quote className="size-6 text-maison-dore/70" aria-hidden />
                   <blockquote className="mt-4 leading-relaxed text-maison-cacao/85">{t.text}</blockquote>

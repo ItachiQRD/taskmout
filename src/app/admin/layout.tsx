@@ -11,6 +11,7 @@ import {
   FolderTree,
   LogOut,
   Droplets,
+  BarChart3,
 } from 'lucide-react';
 
 import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
@@ -18,6 +19,7 @@ import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
 const nav = [
   { label: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
   { label: 'Commandes', href: '/admin/commandes', icon: ShoppingCart },
+  { label: 'Comptabilité', href: '/admin/comptabilite', icon: BarChart3 },
   { label: 'Produits', href: '/admin/produits', icon: Package },
   { label: 'Stocks', href: '/admin/stocks', icon: Layers },
   { label: 'Catégories', href: '/admin/categories', icon: FolderTree },

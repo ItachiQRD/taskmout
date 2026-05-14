@@ -134,21 +134,21 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
           <AnimateSection>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="section-animate-item flex items-start gap-3 p-4 rounded-sm bg-maison-sable/30 border border-maison-brun/10">
+              <div className="section-animate-item flex items-start gap-3 p-4 rounded-2xl bg-maison-sable/30 border border-maison-brun/10">
                 <Truck className="w-5 h-5 text-maison-brun mt-0.5 shrink-0" />
                 <div>
                   <p className="font-display text-maison-cacao">Livraison France</p>
                   <p className="text-maison-cacao/70 text-sm">Expédition soignée dans toute la France.</p>
                 </div>
               </div>
-              <div className="section-animate-item flex items-start gap-3 p-4 rounded-sm bg-maison-sable/30 border border-maison-brun/10">
+              <div className="section-animate-item flex items-start gap-3 p-4 rounded-2xl bg-maison-sable/30 border border-maison-brun/10">
                 <ShieldCheck className="w-5 h-5 text-maison-brun mt-0.5 shrink-0" />
                 <div>
                   <p className="font-display text-maison-cacao">Sans engagement</p>
                   <p className="text-maison-cacao/70 text-sm">Réponse personnelle, sans démarchage.</p>
                 </div>
               </div>
-              <div className="section-animate-item flex items-start gap-3 p-4 rounded-sm bg-maison-sable/30 border border-maison-brun/10">
+              <div className="section-animate-item flex items-start gap-3 p-4 rounded-2xl bg-maison-sable/30 border border-maison-brun/10">
                 <MessageCircle className="w-5 h-5 text-maison-brun mt-0.5 shrink-0" />
                 <div>
                   <p className="font-display text-maison-cacao">Réponse 24–48h</p>
@@ -167,7 +167,7 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
               {/* Colonne infos */}
               <div className="lg:col-span-2 space-y-6">
-                <div className="section-animate-item rounded-sm border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
+                <div className="section-animate-item rounded-2xl border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-maison-brun mt-1" />
                     <div>
@@ -180,7 +180,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="section-animate-item rounded-sm border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
+                <div className="section-animate-item rounded-2xl border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
                   <div className="flex items-start gap-3">
                     <Clock className="w-5 h-5 text-maison-brun mt-1" />
                     <div className="w-full">
@@ -203,7 +203,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="section-animate-item rounded-sm border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
+                <div className="section-animate-item rounded-2xl border border-maison-brun/10 bg-maison-sable/30 p-6 transition-all duration-300 hover:border-maison-brun/20">
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-maison-brun mt-1" />
                     <div>
@@ -225,7 +225,7 @@ export default function ContactPage() {
               {/* Formulaire */}
               <div className="lg:col-span-3">
                 <div ref={formRef} />
-                <div className="section-animate-item rounded-sm border border-maison-brun/10 bg-maison-sable/30 p-6 sm:p-8 shadow-maison">
+                <div className="section-animate-item rounded-2xl border border-maison-brun/10 bg-maison-sable/30 p-6 sm:p-8 shadow-maison">
                   <h2 className="font-display text-2xl text-maison-cacao">Écrivez-nous</h2>
                   <p className="mt-2 text-maison-cacao/70 text-sm">
                     Nous traitons chaque message à la main — merci de nous donner un peu de contexte.
@@ -379,7 +379,7 @@ export default function ContactPage() {
               </p>
             </div>
 
-            <div className="section-animate-item mt-10 rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-creme transition-transform duration-300 hover:-translate-y-1">
+            <div className="section-animate-item mt-10 rounded-2xl overflow-hidden border border-maison-brun/10 bg-maison-creme transition-transform duration-300 hover:-translate-y-1">
               <div className="relative">
                 <iframe
                   title="Carte Taskmout — Reims"

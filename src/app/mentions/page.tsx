@@ -44,7 +44,7 @@ export default function MentionsPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-4 gap-10">
           {/* Sommaire */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-28 rounded-sm border border-maison-brun/10 bg-maison-sable/30 p-5">
+            <div className="lg:sticky lg:top-28 rounded-2xl border border-maison-brun/10 bg-maison-sable/30 p-5">
               <p className="text-maison-brun uppercase text-xs tracking-widest font-semibold">Sommaire</p>
               <ul className="mt-3 space-y-2">
                 {SECTIONS.map((s) => {
