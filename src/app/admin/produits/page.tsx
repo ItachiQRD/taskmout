@@ -16,6 +16,44 @@ function slugify(s: string): string {
     .replace(/^-|-$/g, '');
 }
 
+const MAX_IMG_WIDTH = 800;
+const IMG_QUALITY = 0.85;
+
+function resizeImage(file: File): Promise<File> {
+  return new Promise((resolve) => {
+    if (!file.type.startsWith('image/')) {
+      resolve(file);
+      return;
+    }
+    const img = document.createElement('img');
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(url);
+      if (img.width <= MAX_IMG_WIDTH) {
+        resolve(file);
+        return;
+      }
+      const ratio = MAX_IMG_WIDTH / img.width;
+      const canvas = document.createElement('canvas');
+      canvas.width = MAX_IMG_WIDTH;
+      canvas.height = Math.round(img.height * ratio);
+      const ctx = canvas.getContext('2d');
+      if (!ctx) { resolve(file); return; }
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) { resolve(file); return; }
+          resolve(new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' }));
+        },
+        'image/jpeg',
+        IMG_QUALITY,
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+    img.src = url;
+  });
+}
+
 type Form = {
   name: string;
   slug: string;
@@ -79,7 +117,7 @@ export default function AdminProduitsPage() {
     setShowForm(false);
   };
 
-  const uploadImage = useCallback(async (file: File) => {
+  const uploadImage = useCallback(async (rawFile: File) => {
     setUploadError(null);
     setUploading(true);
 
@@ -90,16 +128,17 @@ export default function AdminProduitsPage() {
       return;
     }
 
-    const fd = new FormData();
-    fd.append('file', file);
-
     try {
+      const file = await resizeImage(rawFile);
+      const fd = new FormData();
+      fd.append('file', file);
+
       const res = await fetch('/api/upload', {
         method: 'POST',
         headers: { 'x-admin-token': token },
         body: fd,
       });
-      const data = (await res.json()) as { url?: string; error?: string };
+      const data = (await res.json()) as { url?: string; error?: string; storage?: string };
       if (!res.ok || !data.url) {
         setUploadError(data.error ?? 'Erreur upload.');
       } else {
