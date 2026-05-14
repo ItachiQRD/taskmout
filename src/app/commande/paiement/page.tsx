@@ -76,89 +76,95 @@ export default function CommandePaiementPage() {
   }
 
   if (!hydrated) {
-    return <div className="max-w-xl mx-auto px-4 py-16 text-center text-ink/60">Chargement…</div>;
+    return (
+      <div className="min-h-screen bg-maison-creme">
+        <div className="max-w-xl mx-auto px-4 py-16 text-center text-maison-cacao/60">Chargement…</div>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-xl mx-auto px-4 sm:px-6 py-10">
-      <Link href="/panier" className="inline-flex items-center gap-2 text-argan-600 hover:text-argan-700 font-medium mb-8">
-        <ArrowLeft className="w-5 h-5" aria-hidden />
-        Retour au panier
-      </Link>
+    <div className="min-h-screen bg-maison-creme">
+      <div className="max-w-xl mx-auto px-4 sm:px-6 py-10">
+        <Link href="/panier" className="inline-flex items-center gap-2 text-maison-brun hover:text-maison-cacao font-medium mb-8 text-sm">
+          <ArrowLeft className="w-4 h-4" aria-hidden />
+          Retour au panier
+        </Link>
 
-      <h1 className="font-display text-2xl font-semibold text-ink">Livraison & paiement SumUp</h1>
-      <p className="mt-2 text-ink/75 text-sm">
-        Après validation, vous serez redirigé vers la page de paiement SumUp. Le montant vérifié côté serveur :{' '}
-        <strong>{total.toFixed(2).replace('.', ',')} €</strong> TTC.
-      </p>
+        <h1 className="font-display text-2xl font-semibold text-maison-cacao">Livraison & paiement</h1>
+        <p className="mt-2 text-maison-cacao/75 text-sm">
+          Après validation, vous serez redirigé vers la page de paiement SumUp. Montant vérifié :{' '}
+          <strong>{total.toFixed(2).replace('.', ',')} €</strong> TTC.
+        </p>
 
-      <form onSubmit={submit} className="mt-8 space-y-5">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-ink mb-1.5">
-            Nom complet
-          </label>
-          <input
-            id="name"
-            autoComplete="name"
-            required
-            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none bg-white text-ink"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-ink mb-1.5">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            required
-            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none bg-white text-ink"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="address" className="block text-sm font-medium text-ink mb-1.5">
-            Adresse de livraison
-          </label>
-          <textarea
-            id="address"
-            required
-            rows={4}
-            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none resize-y bg-white text-ink"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder="Rue, code postal, ville"
-          />
-        </div>
-        <div>
-          <label htmlFor="note" className="block text-sm font-medium text-ink mb-1.5">
-            Note pour la préparation (optionnel)
-          </label>
-          <textarea
-            id="note"
-            rows={3}
-            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none resize-y bg-white text-ink"
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-          />
-        </div>
+        <form onSubmit={submit} className="mt-8 space-y-5">
+          <div>
+            <label htmlFor="name" className="block text-sm font-medium text-maison-cacao mb-1.5">
+              Nom complet
+            </label>
+            <input
+              id="name"
+              autoComplete="name"
+              required
+              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-maison-cacao mb-1.5">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              autoComplete="email"
+              required
+              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none bg-white text-maison-cacao"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium text-maison-cacao mb-1.5">
+              Adresse de livraison
+            </label>
+            <textarea
+              id="address"
+              required
+              rows={4}
+              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Rue, code postal, ville"
+            />
+          </div>
+          <div>
+            <label htmlFor="note" className="block text-sm font-medium text-maison-cacao mb-1.5">
+              Note pour la préparation (optionnel)
+            </label>
+            <textarea
+              id="note"
+              rows={3}
+              className="w-full rounded-sm border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+            />
+          </div>
 
-        {error ? (
-          <p className="text-sm text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-4 py-3">{error}</p>
-        ) : null}
+          {error ? (
+            <p className="text-sm text-rose-700 bg-rose-50 border border-rose-300 rounded-sm px-4 py-3">{error}</p>
+          ) : null}
 
-        <button
-          type="submit"
-          disabled={busy}
-          className="btn-primary w-full min-h-[52px] justify-center disabled:opacity-60"
-        >
-          {busy ? 'Redirection…' : 'Aller au paiement SumUp'}
-        </button>
-      </form>
+          <button
+            type="submit"
+            disabled={busy}
+            className="btn-maison-primary w-full min-h-[52px] justify-center disabled:opacity-60"
+          >
+            {busy ? 'Redirection…' : 'Aller au paiement SumUp'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

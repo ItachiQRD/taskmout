@@ -279,7 +279,7 @@ export default function ArticlesPage() {
               Nous composons aussi des coffrets personnalisés selon vos goûts et le nombre de personnes.
             </p>
             <div className="section-animate-item mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/contact" className="btn-primary inline-flex items-center gap-2">
+              <Link href="/contact" className="btn-maison-primary !w-auto inline-flex items-center gap-2 px-8">
                 Demander un coffret
                 <ArrowRight className="w-4 h-4" />
               </Link>

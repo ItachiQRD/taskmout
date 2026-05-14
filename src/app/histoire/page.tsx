@@ -69,9 +69,9 @@ const TIMELINE = [
 
 export default function HistoirePage() {
   return (
-    <div className="min-h-screen bg-[#1a1a1a]">
+    <div className="min-h-screen bg-maison-creme">
       {/* Hero — visuel arganier en fond */}
-      <section className="relative overflow-hidden border-b border-white/10 min-h-[60vh] flex items-center">
+      <section className="relative overflow-hidden border-b border-maison-brun/10 min-h-[60vh] flex items-center">
         <Image
           src={IMG('hero-arganier.png')}
           alt="Champ d'arganiers au coucher du soleil"
@@ -83,7 +83,7 @@ export default function HistoirePage() {
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-b from-[#1a1a1a]/70 via-[#1a1a1a]/60 to-[#1a1a1a]"
+          className="absolute inset-0 bg-gradient-to-b from-maison-cacao/50 via-maison-cacao/40 to-maison-creme"
         />
         <div
           aria-hidden
@@ -91,24 +91,24 @@ export default function HistoirePage() {
         />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center">
           <AnimateSection>
-            <div className="section-animate inline-flex items-center gap-2 px-4 py-2 rounded-full border border-argan-400/25 bg-white/5 text-cream/90 text-sm">
-              <MapPin className="w-4 h-4 text-argan-300" />
+            <div className="section-animate inline-flex items-center gap-2 px-4 py-2 rounded-full border border-maison-brun/15 bg-maison-sable/30 text-maison-cacao/90 text-sm">
+              <MapPin className="w-4 h-4 text-maison-brun" />
               Du Maroc à Reims
             </div>
-            <h1 className="section-animate mt-6 font-oriental text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-argan-300 via-argan-400 to-olive-400 bg-clip-text text-transparent">
+            <h1 className="section-animate mt-6 font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-maison-brun">
               Notre histoire
             </h1>
-            <p className="section-animate mt-6 text-cream/80 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
+            <p className="section-animate mt-6 text-maison-cacao/80 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed">
               Taskmout est née d&apos;une rencontre&nbsp;: celle d&apos;un héritage marocain et
               d&apos;un savoir-faire appris depuis l&apos;enfance autour des huiles, du miel et de
               l&apos;amlou. Voici comment nous en sommes arrivés là.
             </p>
             <div className="section-animate-item mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/savoir-plus" className="btn-primary inline-flex items-center gap-2 px-7">
+              <Link href="/savoir-plus" className="btn-maison-primary !w-auto inline-flex items-center gap-2 px-7">
                 Découvrir nos produits
                 <ArrowRight className="w-4 h-4 shrink-0" aria-hidden />
               </Link>
-              <Link href="/articles" className="btn-outline-dark inline-flex gap-2">
+              <Link href="/articles" className="btn-maison-outline !w-auto inline-flex gap-2">
                 Voir la gamme
               </Link>
             </div>
@@ -117,11 +117,11 @@ export default function HistoirePage() {
       </section>
 
       {/* Origines — récit principal */}
-      <section className="py-16 sm:py-24 border-b border-white/10">
+      <section className="py-16 sm:py-24 border-b border-maison-brun/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-              <div className="section-animate-item relative aspect-[4/3] rounded-3xl overflow-hidden border border-white/10 bg-white/5">
+              <div className="section-animate-item relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30">
                 <Image
                   src={IMG('origines-cuisine-famille.png')}
                   alt="Cuisine familiale marocaine — origines Taskmout"
@@ -130,18 +130,18 @@ export default function HistoirePage() {
                   sizes="(max-width: 1024px) 100vw, (max-width: 1536px) 50vw, 720px"
                   quality={95}
                 />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/40 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-maison-cacao/40 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-argan-400 shadow-[0_0_18px_rgba(214,139,42,0.6)]" />
-                  <span className="text-cream/90 text-sm">Maroc &middot; Sud-Ouest</span>
+                  <span className="text-maison-cacao/90 text-sm">Maroc &middot; Sud-Ouest</span>
                 </div>
               </div>
 
               <div>
-                <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+                <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
                   Une rencontre entre deux rives
                 </h2>
-                <div className="section-animate-item mt-6 space-y-5 text-cream/85 leading-relaxed border-l-4 border-argan-500/40 pl-5">
+                <div className="section-animate-item mt-6 space-y-5 text-maison-cacao/85 leading-relaxed border-l-4 border-maison-brun/25 pl-5">
                   <p>
                     Tout part d&apos;un geste familial&nbsp;: choisir les bons amandons d&apos;arganier,
                     presser doucement, surveiller le miel, broyer les amandes pour l&apos;amlou.
@@ -167,14 +167,14 @@ export default function HistoirePage() {
       </section>
 
       {/* Timeline */}
-      <section className="py-16 sm:py-24 border-b border-white/10 bg-[#111111]">
+      <section className="py-16 sm:py-24 border-b border-maison-brun/10 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
                 Les étapes qui nous ont menés ici
               </h2>
-              <p className="section-animate mt-4 text-cream/75 leading-relaxed">
+              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
                 D&apos;un savoir transmis à un atelier rémois&nbsp;: voici comment Taskmout a pris forme.
               </p>
             </div>
@@ -200,19 +200,19 @@ export default function HistoirePage() {
                           isLeft ? 'md:text-right md:pr-12 md:order-1' : 'md:text-left md:pl-12 md:order-2'
                         }`}
                       >
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-argan-400/25 bg-white/5">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-maison-brun/15 bg-maison-sable/30">
                           <span className="w-1.5 h-1.5 rounded-full bg-argan-400" />
-                          <span className="text-argan-300 text-xs font-semibold tracking-wide uppercase">
+                          <span className="text-maison-brun text-xs font-semibold tracking-wide uppercase">
                             {step.year}
                           </span>
                         </div>
-                        <h3 className="mt-3 font-display text-xl sm:text-2xl text-cream">{step.title}</h3>
-                        <p className="mt-2 text-cream/75 leading-relaxed">{step.text}</p>
+                        <h3 className="mt-3 font-display text-xl sm:text-2xl text-maison-cacao">{step.title}</h3>
+                        <p className="mt-2 text-maison-cacao/75 leading-relaxed">{step.text}</p>
                       </div>
 
                       {/* Image */}
                       <div className={`mt-6 md:mt-0 ${isLeft ? 'md:order-2' : 'md:order-1'}`}>
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 bg-white/5 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.25)]">
+                        <div className="relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison">
                           <Image
                             src={IMG(step.image)}
                             alt={step.alt}
@@ -222,13 +222,13 @@ export default function HistoirePage() {
                             quality={93}
                             priority={step.year === 'Taskmout'}
                           />
-                          <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-transparent to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-tr from-maison-cacao/35 via-transparent to-transparent" />
                         </div>
                       </div>
 
                       {/* Pastille centrale (desktop) */}
                       <div className="hidden md:flex md:absolute md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 z-10">
-                        <span className="w-4 h-4 rounded-full bg-argan-400 ring-4 ring-[#111111] shadow-[0_0_18px_rgba(214,139,42,0.55)]" />
+                        <span className="w-4 h-4 rounded-full bg-argan-400 ring-4 ring-maison-creme shadow-[0_0_18px_rgba(214,139,42,0.55)]" />
                       </div>
                     </li>
                   );
@@ -240,15 +240,15 @@ export default function HistoirePage() {
       </section>
 
       {/* Savoir-faire visuel */}
-      <section className="py-16 sm:py-24 border-b border-white/10">
+      <section className="py-16 sm:py-24 border-b border-maison-brun/10">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div>
-                <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+                <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
                   Un savoir-faire qui ne se résume pas à une recette
                 </h2>
-                <div className="section-animate-item mt-6 space-y-5 text-cream/85 leading-relaxed">
+                <div className="section-animate-item mt-6 space-y-5 text-maison-cacao/85 leading-relaxed">
                   <p>
                     Travailler une huile, c&apos;est connaître son arbre, son climat,
                     sa saison. Travailler le miel ou l&apos;amlou, c&apos;est respecter la
@@ -265,7 +265,7 @@ export default function HistoirePage() {
                 <div className="section-animate-item mt-8">
                   <Link
                     href="/savoir-plus"
-                    className="btn-primary btn-cta-discover inline-flex items-center justify-center gap-2 text-center"
+                    className="btn-maison-primary !w-auto inline-flex items-center justify-center gap-2 text-center"
                   >
                     <span className="leading-snug max-w-[min(100%,220px)] sm:max-w-none">
                       Voir nos produits &amp; bienfaits
@@ -276,7 +276,7 @@ export default function HistoirePage() {
               </div>
 
               {/* Mosaïque : style initial restauré (le souci venait du fichier source) */}
-              <div className="section-animate-item relative w-full rounded-3xl overflow-hidden border border-white/10 bg-neutral-950 shadow-[0_30px_80px_-30px_rgba(214,139,42,0.3)] aspect-[762/571]">
+              <div className="section-animate-item relative w-full rounded-sm overflow-hidden border border-maison-brun/10 bg-maison-sable/30 shadow-maison aspect-[762/571]">
                 <Image
                   src={IMG('savoir-faire-mosaic.png')}
                   alt="Mosaïque savoir-faire Taskmout — amandons, olives, miel, amlou"
@@ -287,7 +287,7 @@ export default function HistoirePage() {
                 />
                 <div
                   aria-hidden
-                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-argan-400/10"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-maison-cacao/20 via-transparent to-argan-400/10"
                 />
               </div>
             </div>
@@ -296,7 +296,7 @@ export default function HistoirePage() {
       </section>
 
       {/* Valeurs — image d'ambiance en fond */}
-      <section className="relative py-16 sm:py-24 border-b border-white/10 overflow-hidden">
+      <section className="relative py-16 sm:py-24 border-b border-maison-brun/10 overflow-hidden">
         <Image
           src={IMG('valeurs-ambiance.png')}
           alt="Atmosphère atelier Taskmout"
@@ -304,14 +304,14 @@ export default function HistoirePage() {
           className="object-cover opacity-25"
           sizes="100vw"
         />
-        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-[#111111]/85 via-[#111111]/90 to-[#111111]" />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-b from-maison-cacao/70 via-maison-cacao/75 to-maison-cacao/80" />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
           <AnimateSection>
             <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
                 Ce qui nous tient à cœur
               </h2>
-              <p className="section-animate mt-4 text-cream/75 leading-relaxed">
+              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
                 Trois piliers qui guident chaque produit que nous proposons.
               </p>
             </div>
@@ -322,13 +322,13 @@ export default function HistoirePage() {
                 return (
                   <div
                     key={v.title}
-                    className="section-animate-item group relative p-6 rounded-2xl bg-white/5 border border-white/10 transition-all duration-300 hover:border-argan-400/40 hover:-translate-y-1"
+                    className="section-animate-item group relative p-6 rounded-sm bg-maison-sable/30 border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-1"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-argan-500/15 border border-argan-400/25 flex items-center justify-center text-argan-300 group-hover:bg-argan-500/25 transition-colors">
+                    <div className="w-12 h-12 rounded-xl bg-maison-sable/40 border border-maison-brun/15 flex items-center justify-center text-maison-brun group-hover:bg-maison-sable/50 transition-colors">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <h3 className="mt-4 font-display text-xl text-cream">{v.title}</h3>
-                    <p className="mt-2 text-cream/75 leading-relaxed">{v.text}</p>
+                    <h3 className="mt-4 font-display text-xl text-maison-cacao">{v.title}</h3>
+                    <p className="mt-2 text-maison-cacao/75 leading-relaxed">{v.text}</p>
                   </div>
                 );
               })}
@@ -341,18 +341,18 @@ export default function HistoirePage() {
       <section className="py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
           <AnimateSection>
-            <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-cream tracking-tight">
+            <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
               Goûtez à notre histoire
             </h2>
-            <p className="section-animate mt-4 text-cream/80 text-lg max-w-2xl mx-auto">
+            <p className="section-animate mt-4 text-maison-cacao/80 text-lg max-w-2xl mx-auto">
               Découvrez nos huiles, notre amlou et notre miel — ou écrivez-nous pour préparer un coffret sur-mesure.
             </p>
             <div className="section-animate-item mt-8 flex flex-wrap justify-center gap-3">
-              <Link href="/articles" className="btn-primary inline-flex items-center gap-2">
+              <Link href="/articles" className="btn-maison-primary !w-auto inline-flex items-center gap-2">
                 Voir la gamme
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link href="/contact" className="btn-outline inline-flex items-center gap-2 border-argan-400/70 text-cream/90 hover:bg-white/10">
+              <Link href="/contact" className="btn-maison-outline !w-auto inline-flex items-center gap-2">
                 Nous contacter
               </Link>
             </div>
