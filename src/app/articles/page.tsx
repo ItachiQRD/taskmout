@@ -100,7 +100,7 @@ export default function ArticlesPage() {
       </section>
 
       {/* Barre de filtres sticky */}
-      <div className="sticky top-[6.75rem] z-30 border-b border-maison-brun/10 bg-maison-creme/95 backdrop-blur-md">
+      <div className="sticky top-[3.5rem] sm:top-[4rem] z-30 border-b border-maison-brun/10 bg-maison-creme/95 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col gap-3">
             {/* Recherche + tri */}

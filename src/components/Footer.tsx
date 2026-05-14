@@ -15,10 +15,10 @@ const legal = [
 ];
 
 const trust = [
-  { icon: Truck, title: 'Livraison offerte', text: "Dès 60€ d'achat en France." },
-  { icon: CreditCard, title: 'Paiement sécurisé', text: 'Carte bancaire via SumUp.' },
-  { icon: Undo2, title: 'Retours simples', text: 'Échange selon conditions.' },
-  { icon: Headphones, title: 'Service client', text: 'Réponse sous 24–48h.' },
+  { icon: Truck, title: 'Livraison offerte', text: "Dès 60€ d'achat." },
+  { icon: CreditCard, title: 'Paiement sécurisé', text: 'CB, Apple Pay, PayPal.' },
+  { icon: Undo2, title: 'Retours faciles', text: '14 jours pour changer d\u2019avis.' },
+  { icon: Headphones, title: 'Service client', text: 'Réponse sous 24h.' },
 ];
 
 export function Footer() {

@@ -63,3 +63,6 @@ next-env.d.ts
 /data/order-store.json
 /data/catalog.json
 
+# Uploads utilisateur depuis l'admin
+/public/uploads/
+

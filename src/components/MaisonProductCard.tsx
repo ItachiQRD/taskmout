@@ -1,103 +1,81 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { StarRating } from '@/components/StarRating';
 
-export type MaisonProductCardData = {
+export type MaisonProduct = {
   id: string;
   name: string;
-  /** Prix affiché type « 24,90 » (sans € dans la chaîne pour cohérence avec le catalogue). */
   price: string;
   categoryLabel: string;
   image: string | null;
   stock?: number;
-  description?: string | null;
+  description?: string;
+  weight?: string;
 };
 
-function stableReviewCount(productId: string): number {
-  let h = 0;
-  for (let i = 0; i < productId.length; i++) {
-    h = (h + productId.charCodeAt(i) * (i + 3)) % 220;
-  }
-  return 90 + h;
-}
-
-function teaserDescription(text: string | null | undefined, maxLen: number): string {
-  if (!text?.trim()) return 'Petit lot artisanal, pressé ou préparé avec soin.';
-  const t = text.trim();
-  if (t.length <= maxLen) return t;
-  return `${t.slice(0, maxLen).trim()}…`;
-}
-
-/** Carte catalogue type maquette : photo à gauche, détail à droite, CTA pleine largeur. */
-export function MaisonProductCard({ product }: { product: MaisonProductCardData }) {
+export function MaisonProductCard({ product }: { product: MaisonProduct }) {
   const { addProduct } = useCart();
-  const out = product.stock !== undefined && product.stock <= 0;
-  const reviews = useMemo(() => stableReviewCount(product.id), [product.id]);
-  const blurb = useMemo(() => teaserDescription(product.description, 110), [product.description]);
+  const outOfStock = product.stock !== undefined && product.stock <= 0;
 
   return (
-    <article className="card-maison group flex flex-col overflow-hidden rounded-sm md:flex-row md:min-h-[280px]">
+    <article className="group flex flex-col">
+      {/* Image */}
       <Link
         href={`/produit/${product.id}`}
-        className="relative aspect-square w-full shrink-0 bg-maison-creme md:aspect-auto md:h-auto md:w-[46%]"
+        className="relative aspect-[4/5] overflow-hidden rounded-sm border border-maison-brun/8 bg-maison-sable/25"
       >
         {product.image ? (
           <Image
             src={product.image}
-            alt=""
+            alt={product.name}
             fill
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-            sizes="(max-width: 768px) 100vw, 36vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-maison-sable/35 text-7xl opacity-55" aria-hidden>
-            🫒
+          <div className="absolute inset-0 flex items-center justify-center bg-maison-sable/40">
+            <span className="text-7xl opacity-30" aria-hidden>
+              🫒
+            </span>
           </div>
         )}
       </Link>
 
-      <div className="flex flex-1 flex-col justify-between p-5 sm:p-6 md:py-7 md:pl-8 md:pr-7">
-        <div>
-          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-maison-terre">
-            {product.categoryLabel}
-          </p>
-          <Link href={`/produit/${product.id}`}>
-            <h3 className="mt-2 font-display text-xl font-semibold uppercase tracking-[0.04em] text-maison-cacao sm:text-[1.35rem] leading-snug hover:text-maison-brun transition-colors">
-              {product.name}
-            </h3>
-          </Link>
-          <p className="mt-3 font-body text-sm leading-relaxed text-maison-cacao/75">{blurb}</p>
-          <div className="mt-4 flex flex-wrap items-end justify-between gap-3">
-            <p className="font-display text-2xl font-semibold tabular-nums text-maison-cacao">
-              {product.price.includes('€') ? product.price : `${product.price} €`}
-            </p>
-            <StarRating reviewCount={reviews} />
-          </div>
-        </div>
+      {/* Infos */}
+      <div className="mt-4 flex flex-col gap-1">
+        <Link href={`/produit/${product.id}`}>
+          <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-maison-cacao group-hover:text-maison-brun transition-colors line-clamp-1">
+            {product.name}
+          </h3>
+        </Link>
 
-        <div className="mt-6 space-y-2">
-          <button
-            type="button"
-            disabled={out}
-            onClick={(e) => {
-              e.preventDefault();
-              if (!out) addProduct(product.id, 1);
-            }}
-            className="btn-maison-primary"
-          >
-            {out ? 'Indisponible' : 'Ajouter au panier'}
-          </button>
-          <Link
-            href={`/produit/${product.id}`}
-            className="block text-center text-[11px] font-semibold uppercase tracking-[0.12em] text-maison-brun hover:text-maison-cacao transition-colors"
-          >
-            Voir la fiche
-          </Link>
-        </div>
+        {product.weight && (
+          <p className="text-[11px] text-maison-cacao/55">{product.weight}</p>
+        )}
+
+        {product.description && (
+          <p className="mt-1 text-sm leading-relaxed text-maison-cacao/70 line-clamp-2">
+            {product.description}
+          </p>
+        )}
+
+        <p className="mt-2 text-lg font-semibold text-maison-cacao">
+          {product.price}&nbsp;€
+        </p>
+
+        <StarRating rating={5} reviewCount={Math.floor(50 + product.name.length * 7)} size="sm" />
+
+        <button
+          type="button"
+          disabled={outOfStock}
+          onClick={() => addProduct(product.id, 1)}
+          className="btn-maison-primary mt-3 text-[11px]"
+        >
+          {outOfStock ? 'Indisponible' : 'Ajouter au panier'}
+        </button>
       </div>
     </article>
   );

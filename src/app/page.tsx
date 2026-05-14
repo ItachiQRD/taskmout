@@ -101,7 +101,7 @@ const PILLARS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative border-b border-maison-brun/10 bg-maison-creme pt-[7.25rem] sm:pt-[7.5rem] pb-12 sm:pb-16">
+      <section className="relative border-b border-maison-brun/10 bg-maison-creme pt-8 sm:pt-12 pb-12 sm:pb-16">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">

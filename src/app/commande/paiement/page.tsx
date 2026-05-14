@@ -76,40 +76,38 @@ export default function CommandePaiementPage() {
   }
 
   if (!hydrated) {
-    return <div className="max-w-xl mx-auto px-4 py-16 text-center text-maison-cacao/60">Chargement…</div>;
+    return <div className="max-w-xl mx-auto px-4 py-16 text-center text-ink/60">Chargement…</div>;
   }
 
   return (
     <div className="max-w-xl mx-auto px-4 sm:px-6 py-10">
-      <Link href="/panier" className="inline-flex items-center gap-2 mb-8 font-medium uppercase tracking-wider text-maison-brun hover:text-maison-cacao">
+      <Link href="/panier" className="inline-flex items-center gap-2 text-argan-600 hover:text-argan-700 font-medium mb-8">
         <ArrowLeft className="w-5 h-5" aria-hidden />
         Retour au panier
       </Link>
 
-      <h1 className="font-display text-2xl font-semibold uppercase tracking-[0.06em] text-maison-cacao">
-        Livraison & paiement SumUp
-      </h1>
-      <p className="mt-2 text-maison-cacao/75 text-sm">
+      <h1 className="font-display text-2xl font-semibold text-ink">Livraison & paiement SumUp</h1>
+      <p className="mt-2 text-ink/75 text-sm">
         Après validation, vous serez redirigé vers la page de paiement SumUp. Le montant vérifié côté serveur :{' '}
         <strong>{total.toFixed(2).replace('.', ',')} €</strong> TTC.
       </p>
 
       <form onSubmit={submit} className="mt-8 space-y-5">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-maison-cacao mb-1.5">
+          <label htmlFor="name" className="block text-sm font-medium text-ink mb-1.5">
             Nom complet
           </label>
           <input
             id="name"
             autoComplete="name"
             required
-            className="w-full rounded-sm border border-maison-brun/20 bg-white px-4 py-3 text-maison-cacao outline-none focus:border-maison-brun"
+            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none bg-white text-ink"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-maison-cacao mb-1.5">
+          <label htmlFor="email" className="block text-sm font-medium text-ink mb-1.5">
             Email
           </label>
           <input
@@ -117,33 +115,33 @@ export default function CommandePaiementPage() {
             type="email"
             autoComplete="email"
             required
-            className="w-full rounded-sm border border-maison-brun/20 bg-white px-4 py-3 text-maison-cacao outline-none focus:border-maison-brun"
+            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none bg-white text-ink"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="address" className="block text-sm font-medium text-maison-cacao mb-1.5">
+          <label htmlFor="address" className="block text-sm font-medium text-ink mb-1.5">
             Adresse de livraison
           </label>
           <textarea
             id="address"
             required
             rows={4}
-            className="w-full resize-y rounded-sm border border-maison-brun/20 bg-white px-4 py-3 text-maison-cacao outline-none focus:border-maison-brun"
+            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none resize-y bg-white text-ink"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             placeholder="Rue, code postal, ville"
           />
         </div>
         <div>
-          <label htmlFor="note" className="block text-sm font-medium text-maison-cacao mb-1.5">
+          <label htmlFor="note" className="block text-sm font-medium text-ink mb-1.5">
             Note pour la préparation (optionnel)
           </label>
           <textarea
             id="note"
             rows={3}
-            className="w-full resize-y rounded-sm border border-maison-brun/20 bg-white px-4 py-3 text-maison-cacao outline-none focus:border-maison-brun"
+            className="w-full rounded-xl border border-ink/15 px-4 py-3 focus:border-argan-500 outline-none resize-y bg-white text-ink"
             value={note}
             onChange={(e) => setNote(e.target.value)}
           />
@@ -156,7 +154,7 @@ export default function CommandePaiementPage() {
         <button
           type="submit"
           disabled={busy}
-          className="btn-maison-primary justify-center disabled:opacity-60"
+          className="btn-primary w-full min-h-[52px] justify-center disabled:opacity-60"
         >
           {busy ? 'Redirection…' : 'Aller au paiement SumUp'}
         </button>

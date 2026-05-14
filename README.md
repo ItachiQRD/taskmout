@@ -50,8 +50,8 @@ Le site est livré conforme par défaut :
 - Données stockées localement (`localStorage`) tant qu'aucune commande n'est envoyée à un backend.
 
 > Pour une mise en production complète, pensez à compléter `/mentions` (SIRET,
-> directeur de la publication, prestataire de paiement) et à brancher un
-> backend pour l'envoi réel des messages et des commandes.
+> directeur de la publication, prestataire de paiement Stripe Payments Europe
+> Ltd) et à renseigner les variables d'environnement Stripe / SMTP / société.
 
 ## Espace administrateur
 
@@ -86,12 +86,68 @@ Le site est livré conforme par défaut :
 
 Format conseillé : PNG / JPG, ratios respectés, ~2000px sur le côté long, optimisés.
 
+## Paiement, commandes et livraison automatisés
+
+Le tunnel complet est branché :
+
+1. **Panier** côté client (`/panier`, `CartContext` + `localStorage`).
+2. **Checkout** (`/commande/paiement`) → formulaire de livraison → appel `POST /api/checkout/stripe`.
+3. La route crée une **session Stripe Checkout** (le montant est *toujours* recalculé côté serveur depuis `data/catalog.json` ou le seed produits, jamais depuis le client) et redirige le navigateur sur l'URL Stripe.
+4. Après paiement, Stripe redirige vers `/commande/merci?ref=…&session_id=…` qui appelle `POST /api/checkout/confirm` pour réconcilier la commande tout de suite côté UI.
+5. **En parallèle**, le **webhook Stripe** `POST /api/webhooks/stripe` (événement `checkout.session.completed`, signature vérifiée) déclenche la routine `settleOrderIfPaidBySessionId` :
+   - génère **automatiquement** les numéros `BC-YYYY-XXXXXXXX` (bon de commande) et `BL-YYYY-XXXXXXXX` (bon de livraison) ;
+   - **rend les PDF** correspondants via `pdf-lib` (`src/lib/pdf.ts`) ;
+   - envoie au **client** un email de confirmation avec les deux PDF en pièce jointe ;
+   - envoie **au transporteur / service logistique** configuré (`CARRIER_NOTIFICATION_EMAIL`) un email contenant le bon de livraison PDF ;
+   - **post** un payload JSON structuré (BC + BL + ligne de commande) vers `ORDER_WEBHOOK_URL` (et un second optionnel) — branchez n8n, Zapier, ou un ERP qui relaie vers les organismes comptables / logistiques.
+6. Toute la routine est **idempotente** : un re-jeu webhook n'enverra pas les emails ni le payload une deuxième fois.
+
+### Espace admin commandes (`/admin/commandes`)
+
+- Toutes les commandes (status, BC/BL, état des notifications) sont listées.
+- Boutons pour **re-télécharger** à tout moment le bon de commande et le bon de livraison en PDF (`/api/orders/[id]/invoice` et `/api/orders/[id]/delivery-note`).
+- Passage du statut à **« Expédiée »** → envoi automatique de l'avis d'expédition au client.
+
+### Mode test Stripe (recommandé pour démarrer)
+
+1. Créez un compte gratuit sur [stripe.com](https://stripe.com).
+2. Dans le dashboard, gardez le toggle **Test mode** activé.
+3. Récupérez `sk_test_…` et `pk_test_…` dans *Developers → API keys*, et collez-les dans `.env.local`.
+4. Pour recevoir le webhook en local :
+   ```bash
+   # Une fois (https://docs.stripe.com/stripe-cli)
+   stripe login
+   # Puis à chaque session de dev :
+   stripe listen --forward-to localhost:3000/api/webhooks/stripe
+   ```
+   La CLI affichera un secret `whsec_…` à mettre dans `STRIPE_WEBHOOK_SECRET`.
+5. Cartes de test (toujours `12/34`, CVC `123`) :
+   - `4242 4242 4242 4242` → paiement accepté.
+   - `4000 0000 0000 9995` → fonds insuffisants.
+   - `4000 0025 0000 3155` → 3DS requise.
+
+### Passage en production
+
+- Remplacez les clés `sk_test_…` / `pk_test_…` par `sk_live_…` / `pk_live_…`.
+- Créez un endpoint webhook permanent sur [dashboard.stripe.com/webhooks](https://dashboard.stripe.com/webhooks) pointant vers `https://VOTRE-DOMAINE/api/webhooks/stripe`, événement `checkout.session.completed`. Mettez son `Signing secret` dans `STRIPE_WEBHOOK_SECRET`.
+- Configurez l'identité société (`COMPANY_*`) — elle apparaît dans l'en-tête des PDF.
+- Configurez le SMTP (`SMTP_*` + `MAIL_FROM`) et `CARRIER_NOTIFICATION_EMAIL` pour que tout parte automatiquement.
+
+### Persistance des commandes
+
+Les commandes sont enregistrées sur disque dans `data/order-store.json` (auto-créé). Pour un déploiement sur un hébergeur **read-only** (Vercel, Netlify…), il faudra brancher ce module sur une base externe (Postgres, Supabase, Upstash KV) — la surface à remplacer se limite à `src/lib/order-store.ts`.
+
 ## Variables d'environnement
 
-Voir `.env.example`. Variables disponibles :
+Voir `.env.example` pour la liste complète et commentée. Principales :
 
-- `NEXT_PUBLIC_SITE_URL` — URL canonique pour Open Graph
+- `NEXT_PUBLIC_SITE_URL` — URL canonique (Open Graph + URLs de retour Stripe)
 - `NEXT_PUBLIC_ADMIN_PASSWORD` — mot de passe admin
+- `STRIPE_SECRET_KEY`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_WEBHOOK_SECRET` — Stripe
+- `COMPANY_NAME`, `COMPANY_ADDRESS`, `COMPANY_SIRET`, `COMPANY_VAT`, `COMPANY_EMAIL`, `COMPANY_PHONE` — en-tête des PDF
+- `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM`, `MAIL_REPLY_TO` — emails transactionnels
+- `CARRIER_NOTIFICATION_EMAIL` — adresse(s) du transporteur / service expédition (séparées par virgules)
+- `ORDER_WEBHOOK_URL`, `ORDER_WEBHOOK_URL_SECONDARY`, `ORDER_WEBHOOK_SECRET` — relais JSON (n8n, Zapier, ERP)
 
 ## Déploiement
 

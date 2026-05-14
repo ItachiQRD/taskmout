@@ -2,60 +2,70 @@
 
 import Link from 'next/link';
 import { useMemo } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { useStore } from '@/context/StoreContext';
 import { MaisonProductCard } from '@/components/MaisonProductCard';
-import { ArrowRight } from 'lucide-react';
-
-const MAX = 6;
+import { AnimateSection } from '@/components/AnimateSection';
 
 export function HomeFeaturedProducts() {
   const { products, getCategoryById } = useStore();
 
-  const featured = useMemo(() => {
-    return [...products.filter((p) => p.active)]
-      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
-      .slice(0, MAX);
-  }, [products]);
+  const featured = useMemo(
+    () =>
+      products
+        .filter((p) => p.active && p.stock > 0)
+        .sort((a, b) => (b.createdAt ?? '').localeCompare(a.createdAt ?? ''))
+        .slice(0, 3),
+    [products]
+  );
 
-  if (featured.length === 0) return null;
+  if (!featured.length) return null;
 
   return (
-    <section className="border-y border-maison-brun/10 bg-white py-14 sm:py-20">
+    <section className="border-t border-maison-brun/10 bg-maison-creme py-16 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">
-              Boutique
-            </p>
-            <h2 className="mt-2 font-display text-3xl font-semibold uppercase tracking-[0.06em] text-maison-cacao sm:text-4xl">
-              Nos incontournables
-            </h2>
+        <AnimateSection>
+          <div className="flex items-end justify-between gap-4">
+            <div>
+              <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">
+                Nos incontournables
+              </p>
+            </div>
+            <Link
+              href="/articles"
+              className="section-animate hidden sm:inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-[0.14em] text-maison-cacao hover:text-maison-brun transition-colors"
+            >
+              Voir toute la boutique <ArrowRight className="size-3.5" />
+            </Link>
           </div>
-          <Link
-            href="/articles"
-            className="group inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-maison-brun hover:text-maison-cacao transition-colors"
-          >
-            Voir toute la boutique
-            <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden />
-          </Link>
-        </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2 xl:gap-10">
-          {featured.map((p) => (
-            <MaisonProductCard
-              key={p.id}
-              product={{
-                id: p.id,
-                name: p.name,
-                price: p.price,
-                categoryLabel: getCategoryById(p.categoryId)?.name ?? 'Maison Taskmout',
-                image: p.image,
-                stock: p.stock,
-                description: p.description,
-              }}
-            />
-          ))}
-        </div>
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+            {featured.map((p) => (
+              <div key={p.id} className="section-animate-item">
+                <MaisonProductCard
+                  product={{
+                    id: p.id,
+                    name: p.name,
+                    price: p.price,
+                    categoryLabel: getCategoryById(p.categoryId)?.name ?? 'Maison Taskmout',
+                    image: p.image,
+                    stock: p.stock,
+                    description: p.description,
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center sm:hidden">
+            <Link
+              href="/articles"
+              className="btn-maison-outline inline-flex !w-auto items-center gap-2 px-8"
+            >
+              Voir toute la boutique <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </AnimateSection>
       </div>
     </section>
   );
