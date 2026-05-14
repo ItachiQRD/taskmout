@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { AnimateSection } from '@/components/AnimateSection';
 import { RecettesCarousel } from '@/components/RecettesCarousel';
 import Link from 'next/link';
+import { ArrowRight, Droplets, Sparkles, Leaf, HeartHandshake } from 'lucide-react';
 
 const IMG = (path: string) => `/assets/images/savoir-plus/${path}`;
 
@@ -9,40 +10,79 @@ const BIENFAITS_CORPS = [
   {
     key: 'cheveux',
     title: 'Cheveux',
+    icon: '✨',
     description:
       "Nourrit les pointes et apporte de la brillance. Utilisable en masque ou en soin léger pour limiter les fourches.",
   },
   {
     key: 'barbe',
     title: 'Barbe',
+    icon: '🧔',
     description:
       "Hydrate la barbe et la peau. Quelques gouttes suffisent pour assouplir le poil et calmer les irritations.",
   },
   {
     key: 'peau',
     title: 'Peau & massage',
+    icon: '🤲',
     description:
       "Absorption rapide sur les zones sèches (mains, coudes, pieds). Idéale en massage pour hydrater et détendre.",
   },
   {
     key: 'ongles',
     title: 'Ongles & cuticules',
+    icon: '💅',
     description:
       'Aide à renforcer ongles et cuticules. Un massage court et régulier limite les gerçures.',
   },
 ] as const;
 
-function BienfaitCard({ title, description }: { title: string; description: string }) {
+function BienfaitCard({ title, icon, description }: { title: string; icon: string; description: string }) {
   return (
     <div className="group h-full p-5 sm:p-6 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-0.5">
       <div className="flex items-center gap-3">
-        <span className="w-1.5 h-1.5 rounded-full bg-maison-dore" />
+        <span className="text-xl" aria-hidden>{icon}</span>
         <h3 className="font-display text-lg sm:text-xl text-maison-brun">{title}</h3>
       </div>
       <p className="mt-3 text-maison-cacao/75 text-sm leading-relaxed">{description}</p>
     </div>
   );
 }
+
+const PRODUITS = [
+  {
+    name: "Huile d'argan",
+    desc: "Pressée à froid à partir des amandons d'arganier. Assaisonnement, finition de plats, peau et cheveux.",
+    image: IMG('huile-argan.png'),
+    alt: "Huile d'argan Taskmout",
+    icon: Droplets,
+    borderColor: 'border-l-maison-dore/60',
+  },
+  {
+    name: "Huile d'olive",
+    desc: "Huiles issues de terroirs sélectionnés, au profil fruité équilibré. Parfaites en salade ou en touche finale.",
+    image: IMG('huile-olive.png'),
+    alt: "Huile d'olive Taskmout",
+    icon: Leaf,
+    borderColor: 'border-l-maison-olive/60',
+  },
+  {
+    name: 'Miel',
+    desc: "Miels de terroir choisis pour leur goût et leur naturalité. Idéals au petit-déjeuner et dans l'amlou.",
+    image: IMG('miel-pot-rayon.png'),
+    alt: 'Miel Taskmout',
+    icon: Sparkles,
+    borderColor: 'border-l-maison-dore/60',
+  },
+  {
+    name: 'Amlou',
+    desc: "Pâte onctueuse amande (ou cacahuète), huile d'argan et miel. À tartiner ou à intégrer dans vos desserts.",
+    image: IMG('amlou-cacahuetes.png'),
+    alt: 'Amlou Taskmout',
+    icon: HeartHandshake,
+    borderColor: 'border-l-maison-brun/40',
+  },
+];
 
 const RECETTES_SLIDES = [
   {
@@ -68,6 +108,13 @@ const RECETTES_SLIDES = [
   },
 ];
 
+const NAV_SECTIONS = [
+  { id: 'sp-produits', label: 'Nos produits' },
+  { id: 'sp-nutrition', label: 'Nutrition' },
+  { id: 'sp-corps', label: 'Soins du corps' },
+  { id: 'sp-recettes', label: 'Recettes' },
+];
+
 export const metadata = {
   title: 'Savoir plus — Huiles, bienfaits & recettes | Taskmout',
   description: 'Découvrez nos huiles d\'argan et d\'olive, le miel, leurs bienfaits nutritionnels et pour le corps (cheveux, barbe, massage), et des idées de recettes comme le tiramisu amlou.',
@@ -76,233 +123,225 @@ export const metadata = {
 export default function SavoirPlusPage() {
   return (
     <div className="min-h-screen bg-maison-creme">
-      {/* En-tête */}
-      <section className="border-b border-maison-brun/10 py-12 sm:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      {/* Hero */}
+      <section className="border-b border-maison-brun/10 bg-white py-14 sm:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <AnimateSection>
-            <h1 className="section-animate font-display text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-maison-brun">
-              Huiles, bienfaits & recettes
-            </h1>
-            <p className="section-animate mt-4 sm:mt-6 text-maison-cacao/75 text-base sm:text-xl max-w-2xl mx-auto leading-relaxed">
-              Tout ce que nous souhaitons partager sur nos huiles, l&apos;amlou, le miel et la façon d&apos;en profiter au quotidien — en cuisine, pour le corps et en idées recettes.
-            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div>
+                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">
+                  Tout savoir
+                </p>
+                <h1 className="section-animate mt-3 font-display text-3xl sm:text-4xl md:text-[2.75rem] font-bold tracking-tight text-maison-cacao leading-tight">
+                  Huiles, bienfaits
+                  <br />
+                  <span className="text-maison-brun">&amp; recettes</span>
+                </h1>
+                <p className="section-animate mt-5 text-maison-cacao/75 text-base sm:text-lg leading-relaxed max-w-lg">
+                  Tout ce que nous souhaitons partager sur nos huiles, l&apos;amlou, le miel et la façon d&apos;en profiter au quotidien — en cuisine, pour le corps et en idées recettes.
+                </p>
+                <div className="section-animate-item mt-7 flex flex-wrap gap-3">
+                  <Link href="/articles" className="btn-maison-primary !w-auto inline-flex items-center gap-2 px-7">
+                    Voir la boutique <ArrowRight className="size-4" aria-hidden />
+                  </Link>
+                  <a href="#sp-recettes" className="btn-maison-outline !w-auto inline-flex items-center gap-2 px-7">
+                    Nos recettes
+                  </a>
+                </div>
+              </div>
+              <div className="section-animate-item relative aspect-[4/3] rounded-sm overflow-hidden border border-maison-brun/10 shadow-maison">
+                <Image
+                  src={IMG('coffret-produits.png')}
+                  alt="Coffret huiles, amlou et miel Taskmout"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 480px"
+                  priority
+                />
+              </div>
+            </div>
           </AnimateSection>
         </div>
-        <div className="md:hidden mt-6 px-4">
-          <div className="mx-auto max-w-4xl rounded-sm border border-maison-brun/10 bg-white p-2">
+
+        {/* Quick nav — mobile */}
+        <div className="md:hidden mt-8 px-4">
+          <div className="mx-auto max-w-5xl rounded-sm border border-maison-brun/10 bg-maison-creme p-2">
             <div className="grid grid-cols-2 gap-2">
-              <a href="#sp-produits" className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-maison-sable/30 px-3 text-xs font-medium text-maison-cacao/90">Produits</a>
-              <a href="#sp-nutrition" className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-maison-sable/30 px-3 text-xs font-medium text-maison-cacao/90">Nutrition</a>
-              <a href="#sp-corps" className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-maison-sable/30 px-3 text-xs font-medium text-maison-cacao/90">Corps</a>
-              <a href="#sp-recettes" className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-maison-sable/30 px-3 text-xs font-medium text-maison-cacao/90">Recettes</a>
+              {NAV_SECTIONS.map((s) => (
+                <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-[44px] items-center justify-center rounded-sm bg-white px-3 text-xs font-medium text-maison-cacao/90 border border-maison-brun/8 transition-colors hover:bg-maison-sable/30">
+                  {s.label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Produits */}
-      <section id="sp-produits" className="py-12 sm:py-24 border-b border-maison-brun/10">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <AnimateSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
-                Les huiles et produits de base
-              </h2>
-              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
-                Des terroirs marocains à votre table : nos cinq incontournables, pressés à froid et travaillés avec soin.
-              </p>
-            </div>
-
-            <div className="mt-8 sm:mt-12 space-y-5 sm:space-y-10">
-              <div className="section-animate-item flex gap-4 sm:flex-row sm:gap-8 items-stretch p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25">
-                <div className="relative w-24 h-24 sm:w-48 sm:h-auto shrink-0 sm:aspect-square rounded-sm overflow-hidden bg-maison-sable/30">
-                  <Image src={IMG('huile-argan.png')} alt="Huile d'argan Taskmout" fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" />
-                </div>
-                <div className="flex-1 sm:border-l-4 sm:border-maison-dore/50 sm:pl-4 flex flex-col justify-center">
-                  <h3 className="font-display text-xl text-maison-brun">Huile d&apos;argan</h3>
-                  <p className="mt-1.5 sm:mt-2 text-maison-cacao/75 text-sm sm:text-base leading-relaxed">
-                    Pressée à froid à partir des amandons d&apos;arganier. Utilisation simple : assaisonnement, finition de plats, peau et cheveux.
-                  </p>
-                </div>
-              </div>
-
-              <div className="section-animate-item flex gap-4 sm:flex-row-reverse sm:gap-8 items-stretch p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25">
-                <div className="relative w-24 h-24 sm:w-48 sm:h-auto shrink-0 sm:aspect-square rounded-sm overflow-hidden bg-maison-sable/30">
-                  <Image src={IMG('huile-olive.png')} alt="Huile d'olive Taskmout" fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" />
-                </div>
-                <div className="flex-1 min-w-0 sm:border-r-4 sm:border-maison-olive/50 sm:pr-4 sm:text-right flex flex-col justify-center">
-                  <h3 className="font-display text-xl text-maison-olive">Huile d&apos;olive</h3>
-                  <p className="mt-1.5 sm:mt-2 text-maison-cacao/75 text-sm sm:text-base leading-relaxed">
-                    Huiles issues de terroirs sélectionnés, au profil fruité équilibré. Parfaites en salade, sur tartines ou en touche finale.
-                  </p>
-                </div>
-              </div>
-
-              <div className="section-animate-item p-4 sm:p-8 rounded-sm bg-white border border-maison-brun/10 border-l-4 border-l-maison-dore/40 shadow-card transition-all duration-300 hover:border-l-maison-dore/70 text-center max-w-3xl mx-auto">
-                <h3 className="font-display text-xl text-maison-cacao">Autres huiles</h3>
-                <p className="mt-1.5 sm:mt-2 text-maison-cacao/75 text-sm sm:text-base leading-relaxed">
-                  Selon la saison : noix, amande et autres fruits à coque. Même exigence : origine claire et pression à froid.
-                </p>
-              </div>
-
-              <div className="section-animate-item flex gap-4 sm:flex-row sm:gap-8 items-stretch p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25">
-                <div className="relative w-24 h-24 sm:w-48 sm:h-auto shrink-0 sm:aspect-square rounded-sm overflow-hidden bg-maison-sable/30">
-                  <Image src={IMG('miel-pot-rayon.png')} alt="Miel Taskmout" fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" />
-                </div>
-                <div className="flex-1 sm:border-l-4 sm:border-maison-dore/50 sm:pl-4 flex flex-col justify-center">
-                  <h3 className="font-display text-xl text-maison-brun">Miel</h3>
-                  <p className="mt-1.5 sm:mt-2 text-maison-cacao/75 text-sm sm:text-base leading-relaxed">
-                    Miels de terroir choisis pour leur goût et leur naturalité. Idéals au petit-déjeuner, en cuisine et dans l&apos;amlou.
-                  </p>
-                </div>
-              </div>
-
-              <div className="section-animate-item flex gap-4 sm:flex-row-reverse sm:gap-8 items-stretch p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25">
-                <div className="relative w-24 h-24 sm:w-48 sm:h-auto shrink-0 sm:aspect-square rounded-sm overflow-hidden bg-maison-sable/30">
-                  <Image src={IMG('amlou-cacahuetes.png')} alt="Amlou Taskmout" fill className="object-cover" sizes="(max-width: 640px) 100vw, 192px" />
-                </div>
-                <div className="flex-1 min-w-0 sm:border-r-4 sm:border-maison-dore/50 sm:pr-4 sm:text-right flex flex-col justify-center">
-                  <h3 className="font-display text-xl text-maison-brun">Amlou</h3>
-                  <p className="mt-1.5 sm:mt-2 text-maison-cacao/75 text-sm sm:text-base leading-relaxed">
-                    Pâte onctueuse amande (ou cacahuète), huile d&apos;argan et miel. À tartiner ou à intégrer dans vos desserts.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </AnimateSection>
-        </div>
-      </section>
-
-      {/* Bienfaits nutritionnels */}
-      <section id="sp-nutrition" className="py-12 sm:py-24 border-b border-maison-brun/10 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimateSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
-                Bienfaits nutritionnels
-              </h2>
-              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
-                Riches en acides gras insaturés, vitamine E et antioxydants. En quantité raisonnable, elles s&apos;intègrent à une alimentation équilibrée.
-              </p>
-            </div>
-
-            <div className="mt-8 sm:mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
-              <div className="section-animate-item relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-maison-sable/30 border border-maison-brun/10 shadow-soft max-w-md md:ml-auto">
-                <Image src={IMG('coffret-produits.png')} alt="Coffret huiles, amlou et miel Taskmout" fill className="object-cover" sizes="(max-width: 768px) 100vw, 480px" />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent pointer-events-none" />
-              </div>
-              <ul className="section-animate-item space-y-3 sm:space-y-4 text-maison-cacao/85 max-w-md">
-                <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-sm bg-maison-creme border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25">
-                  <span className="text-maison-dore shrink-0 mt-1">●</span>
-                  <span>Assaisonnement de salades et crudités.</span>
-                </li>
-                <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-sm bg-maison-creme border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25">
-                  <span className="text-maison-dore shrink-0 mt-1">●</span>
-                  <span>Tartines du matin avec amlou ou miel.</span>
-                </li>
-                <li className="flex gap-3 items-start p-3.5 sm:p-4 rounded-sm bg-maison-creme border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/25">
-                  <span className="text-maison-dore shrink-0 mt-1">●</span>
-                  <span>Finition de plats chauds pour préserver les nutriments.</span>
-                </li>
-              </ul>
-            </div>
-          </AnimateSection>
-        </div>
-      </section>
-
-      {/* Bienfaits pour le corps */}
-      <section id="sp-corps" className="py-12 sm:py-24 border-b border-maison-brun/10 bg-maison-sable/20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <AnimateSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
-                Bienfaits pour le corps
-              </h2>
-              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
-                Nos huiles sont utilisées depuis longtemps pour nourrir la peau et les cheveux. Quatre usages emblématiques, autour d&apos;un même flacon.
-              </p>
-            </div>
-
-            <div className="hidden md:block mt-16">
-              <div className="relative mx-auto" style={{ maxWidth: '880px' }}>
-                <div aria-hidden className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                  <div className="absolute w-[1px] h-2/3 bg-gradient-to-b from-transparent via-maison-dore/25 to-transparent" />
-                  <div className="absolute h-[1px] w-2/3 bg-gradient-to-r from-transparent via-maison-dore/25 to-transparent" />
-                </div>
-
-                <div className="relative grid grid-cols-3 grid-rows-3 gap-5 lg:gap-6">
-                  <div className="section-animate-item col-start-2 row-start-1">
-                    <BienfaitCard title={BIENFAITS_CORPS[0].title} description={BIENFAITS_CORPS[0].description} />
-                  </div>
-                  <div className="section-animate-item col-start-1 row-start-2 flex">
-                    <BienfaitCard title={BIENFAITS_CORPS[1].title} description={BIENFAITS_CORPS[1].description} />
-                  </div>
-                  <div className="col-start-2 row-start-2 flex items-center justify-center">
-                    <div className="relative w-44 h-44 lg:w-56 lg:h-56 rounded-full overflow-hidden ring-2 ring-maison-dore/40 shadow-warm">
-                      <Image src={IMG('huile-miracle-soins-cheveux.png')} alt="Huile Miracle Taskmout — soins du corps" fill className="object-cover" sizes="(max-width: 1024px) 176px, 224px" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-maison-dore/10 via-transparent to-maison-olive/10 pointer-events-none" />
-                    </div>
-                  </div>
-                  <div className="section-animate-item col-start-3 row-start-2 flex">
-                    <BienfaitCard title={BIENFAITS_CORPS[2].title} description={BIENFAITS_CORPS[2].description} />
-                  </div>
-                  <div className="section-animate-item col-start-2 row-start-3">
-                    <BienfaitCard title={BIENFAITS_CORPS[3].title} description={BIENFAITS_CORPS[3].description} />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="md:hidden mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              {BIENFAITS_CORPS.map((b) => (
-                <div key={b.key} className="section-animate-item">
-                  <BienfaitCard title={b.title} description={b.description} />
-                </div>
+      {/* Main content with optional sticky side nav */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[180px_1fr] gap-10 lg:gap-14">
+          {/* Sticky sidebar — desktop */}
+          <aside className="hidden lg:block">
+            <nav className="sticky top-28 space-y-1 pt-14" aria-label="Sections">
+              {NAV_SECTIONS.map((s) => (
+                <a
+                  key={s.id}
+                  href={`#${s.id}`}
+                  className="block rounded-sm px-3 py-2 text-sm text-maison-cacao/70 hover:text-maison-brun hover:bg-maison-sable/30 transition-colors"
+                >
+                  {s.label}
+                </a>
               ))}
-              <div className="sm:col-span-2 flex justify-center mt-1">
-                <div className="relative w-32 h-32 rounded-full overflow-hidden ring-2 ring-maison-dore/40 shadow-warm">
-                  <Image src={IMG('huile-miracle-soins-cheveux.png')} alt="Huile Miracle Taskmout — soins du corps" fill className="object-cover" sizes="160px" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-maison-dore/10 via-transparent to-maison-olive/10 pointer-events-none" />
+            </nav>
+          </aside>
+
+          <div>
+            {/* Produits */}
+            <section id="sp-produits" className="py-12 sm:py-20 border-b border-maison-brun/10">
+              <AnimateSection>
+                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">Nos produits</p>
+                <h2 className="section-animate mt-2 font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
+                  Les huiles et produits de base
+                </h2>
+                <p className="section-animate mt-3 text-maison-cacao/75 leading-relaxed max-w-2xl">
+                  Des terroirs marocains à votre table : nos incontournables, pressés à froid et travaillés avec soin.
+                </p>
+
+                <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                  {PRODUITS.map((p) => {
+                    const Icon = p.icon;
+                    return (
+                      <div key={p.name} className={`section-animate-item flex gap-4 p-4 sm:p-5 rounded-sm bg-white border border-maison-brun/10 border-l-4 ${p.borderColor} shadow-card transition-all duration-300 hover:border-maison-brun/20 hover:-translate-y-0.5`}>
+                        <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 rounded-sm overflow-hidden bg-maison-sable/30">
+                          <Image src={p.image} alt={p.alt} fill className="object-cover" sizes="96px" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <Icon className="size-4 text-maison-brun/70 shrink-0" aria-hidden />
+                            <h3 className="font-display text-base sm:text-lg text-maison-brun truncate">{p.name}</h3>
+                          </div>
+                          <p className="mt-1.5 text-maison-cacao/75 text-sm leading-relaxed line-clamp-3">{p.desc}</p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              </div>
-            </div>
-          </AnimateSection>
-        </div>
-      </section>
 
-      {/* Recettes */}
-      <section id="sp-recettes" className="py-12 sm:py-24 border-b border-maison-brun/10 bg-white">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6">
-          <AnimateSection>
-            <div className="text-center max-w-3xl mx-auto">
-              <h2 className="section-animate font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-maison-cacao tracking-tight">
-                Idées de recettes
-              </h2>
-              <p className="section-animate mt-4 text-maison-cacao/75 leading-relaxed">
-                L&apos;amlou et nos huiles se prêtent à des recettes simples et gourmandes — du petit-déjeuner au dessert.
-                Sur mobile, utilisez les flèches puis le bouton « Voir les détails ».
-              </p>
-            </div>
-            <div className="section-animate-item mt-10">
-              <RecettesCarousel recettes={RECETTES_SLIDES} />
-            </div>
-          </AnimateSection>
-        </div>
-      </section>
+                <div className="section-animate-item mt-4 p-5 rounded-sm bg-maison-sable/25 border border-maison-brun/8 text-center">
+                  <p className="text-sm text-maison-cacao/70">
+                    Selon la saison : noix, amande et autres fruits à coque. Même exigence : origine claire et pression à froid.
+                  </p>
+                </div>
 
-      {/* CTA */}
-      <section className="py-16 sm:py-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center">
-          <AnimateSection>
-            <p className="section-animate text-maison-cacao/80 text-lg">
-              Retrouvez nos huiles, amlou et miel dans la gamme et sur la page articles.
-            </p>
-            <Link href="/articles" className="section-animate-item btn-maison-primary !w-auto mt-8 inline-flex items-center gap-2 px-8">
-              Voir la gamme
-            </Link>
-          </AnimateSection>
+                <div className="section-animate-item mt-6 text-center">
+                  <Link href="/articles" className="inline-flex items-center gap-2 text-sm font-medium text-maison-brun hover:text-maison-cacao transition-colors">
+                    Voir tous les produits en boutique <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </AnimateSection>
+            </section>
+
+            {/* Bienfaits nutritionnels */}
+            <section id="sp-nutrition" className="py-12 sm:py-20 border-b border-maison-brun/10">
+              <AnimateSection>
+                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">Nutrition</p>
+                <h2 className="section-animate mt-2 font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
+                  Bienfaits nutritionnels
+                </h2>
+                <p className="section-animate mt-3 text-maison-cacao/75 leading-relaxed max-w-2xl">
+                  Riches en acides gras insaturés, vitamine E et antioxydants. En quantité raisonnable, elles s&apos;intègrent à une alimentation équilibrée.
+                </p>
+
+                <div className="mt-8 sm:mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+                  <div className="section-animate-item relative w-full aspect-[4/3] rounded-sm overflow-hidden bg-maison-sable/30 border border-maison-brun/10 shadow-soft max-w-md">
+                    <Image src={IMG('coffret-produits.png')} alt="Coffret huiles, amlou et miel Taskmout" fill className="object-cover" sizes="(max-width: 768px) 100vw, 480px" />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-transparent pointer-events-none" />
+                  </div>
+                  <div className="section-animate-item space-y-3">
+                    {[
+                      'Assaisonnement de salades et crudités.',
+                      'Tartines du matin avec amlou ou miel.',
+                      'Finition de plats chauds pour préserver les nutriments.',
+                      'Base pour vinaigrettes maison et marinades.',
+                    ].map((text, i) => (
+                      <div key={i} className="flex gap-3 items-start p-3.5 rounded-sm bg-white border border-maison-brun/10 transition-all duration-300 hover:border-maison-brun/20">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-maison-sable/40 text-xs font-bold text-maison-brun">{i + 1}</span>
+                        <span className="text-sm text-maison-cacao/85 leading-relaxed">{text}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </AnimateSection>
+            </section>
+
+            {/* Bienfaits pour le corps */}
+            <section id="sp-corps" className="py-12 sm:py-20 border-b border-maison-brun/10">
+              <AnimateSection>
+                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">Soins du corps</p>
+                <h2 className="section-animate mt-2 font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
+                  Bienfaits pour le corps
+                </h2>
+                <p className="section-animate mt-3 text-maison-cacao/75 leading-relaxed max-w-2xl">
+                  Nos huiles sont utilisées depuis longtemps pour nourrir la peau et les cheveux. Quatre usages emblématiques.
+                </p>
+
+                <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {BIENFAITS_CORPS.map((b) => (
+                    <div key={b.key} className="section-animate-item">
+                      <BienfaitCard title={b.title} icon={b.icon} description={b.description} />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="section-animate-item mt-8 flex justify-center">
+                  <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-2 ring-maison-dore/40 shadow-warm">
+                    <Image src={IMG('huile-miracle-soins-cheveux.png')} alt="Huile Miracle Taskmout — soins du corps" fill className="object-cover" sizes="176px" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-maison-dore/10 via-transparent to-maison-olive/10 pointer-events-none" />
+                  </div>
+                </div>
+              </AnimateSection>
+            </section>
+
+            {/* Recettes */}
+            <section id="sp-recettes" className="py-12 sm:py-20 border-b border-maison-brun/10">
+              <AnimateSection>
+                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">Idées gourmandes</p>
+                <h2 className="section-animate mt-2 font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
+                  Idées de recettes
+                </h2>
+                <p className="section-animate mt-3 text-maison-cacao/75 leading-relaxed max-w-2xl">
+                  L&apos;amlou et nos huiles se prêtent à des recettes simples et gourmandes — du petit-déjeuner au dessert.
+                </p>
+                <div className="section-animate-item mt-8 sm:mt-10">
+                  <RecettesCarousel recettes={RECETTES_SLIDES} />
+                </div>
+              </AnimateSection>
+            </section>
+
+            {/* CTA */}
+            <section className="py-14 sm:py-20">
+              <AnimateSection>
+                <div className="section-animate rounded-sm border border-maison-brun/10 bg-white p-8 sm:p-10 text-center shadow-card">
+                  <h2 className="font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
+                    Envie d&apos;essayer ?
+                  </h2>
+                  <p className="mt-3 text-maison-cacao/75 max-w-lg mx-auto">
+                    Retrouvez nos huiles, amlou et miel dans la boutique. Livraison soignée dans toute la France.
+                  </p>
+                  <div className="mt-6 flex flex-wrap justify-center gap-3">
+                    <Link href="/articles" className="btn-maison-primary !w-auto inline-flex items-center gap-2 px-8">
+                      Voir la gamme <ArrowRight className="size-4" aria-hidden />
+                    </Link>
+                    <Link href="/contact" className="btn-maison-outline !w-auto inline-flex items-center gap-2 px-8">
+                      Nous contacter
+                    </Link>
+                  </div>
+                </div>
+              </AnimateSection>
+            </section>
+          </div>
         </div>
-      </section>
+      </div>
     </div>
   );
 }
