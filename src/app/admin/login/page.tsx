@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Eye, EyeOff, Lock, ShieldCheck, ArrowLeft, Loader2, Check } from 'lucide-react';
 
-import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
+import { getAdminPassword, saveAdminSession } from '@/lib/admin-client';
 
 type Status = 'idle' | 'loading' | 'success';
 
@@ -40,7 +40,7 @@ export default function AdminLoginPage() {
     await new Promise((r) => setTimeout(r, 500));
 
     if (password === getAdminPassword()) {
-      sessionStorage.setItem(ADMIN_SESSION_KEY, password);
+      saveAdminSession(password);
       setStatus('success');
       setTimeout(() => router.push('/admin'), 700);
     } else {

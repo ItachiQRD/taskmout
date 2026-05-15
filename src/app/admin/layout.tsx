@@ -14,7 +14,7 @@ import {
   BarChart3,
 } from 'lucide-react';
 
-import { ADMIN_SESSION_KEY, getAdminPassword } from '@/lib/admin-client';
+import { isAdminSessionValid, clearAdminSession } from '@/lib/admin-client';
 
 const nav = [
   { label: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
@@ -32,14 +32,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const session = sessionStorage.getItem(ADMIN_SESSION_KEY);
     const isLoginPage = pathname === '/admin/login';
     if (isLoginPage) {
       setAllowed(true);
       setChecking(false);
       return;
     }
-    if (session === getAdminPassword()) {
+    if (isAdminSessionValid()) {
       setAllowed(true);
     } else {
       router.replace('/admin/login');
@@ -48,7 +47,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   }, [pathname, router]);
 
   const logout = () => {
-    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    clearAdminSession();
     router.push('/admin/login');
   };
 

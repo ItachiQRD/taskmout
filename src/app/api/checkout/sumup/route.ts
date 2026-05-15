@@ -6,6 +6,7 @@ import { upsertOrder } from '@/lib/order-store';
 import { sumupCreateHostedCheckout } from '@/lib/sumup';
 import { sendCustomerPaymentLinkEmail, isMailConfigured } from '@/lib/mail';
 import { getSiteBaseUrl } from '@/lib/site-url';
+import { validateFrenchAddressManual } from '@/lib/french-address';
 import type { Order } from '@/types/store';
 
 export const runtime = 'nodejs';
@@ -28,6 +29,14 @@ export async function POST(req: Request) {
   const customer = body.customer;
   if (!items || !customer?.email?.trim() || !customer.name?.trim() || !customer.address?.trim()) {
     return NextResponse.json({ error: 'Données client ou panier manquantes.' }, { status: 400 });
+  }
+
+  const addressCheck = validateFrenchAddressManual(customer.address.trim());
+  if (!addressCheck.valid) {
+    return NextResponse.json(
+      { error: addressCheck.error ?? 'Adresse de livraison invalide (France uniquement).' },
+      { status: 400 },
+    );
   }
 
   const merchantCode = process.env.SUMUP_MERCHANT_CODE?.trim();

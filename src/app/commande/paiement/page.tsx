@@ -7,6 +7,9 @@ import { ArrowLeft } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useStore } from '@/context/StoreContext';
 import { parsePriceFr } from '@/lib/price';
+import { FrenchAddressInput } from '@/components/FrenchAddressInput';
+import type { FrenchAddressValue } from '@/lib/french-address';
+import { validateFrenchAddressManual } from '@/lib/french-address';
 
 export default function CommandePaiementPage() {
   const router = useRouter();
@@ -14,7 +17,7 @@ export default function CommandePaiementPage() {
   const { products } = useStore();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
+  const [addressValue, setAddressValue] = useState<FrenchAddressValue | null>(null);
   const [note, setNote] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -34,13 +37,21 @@ export default function CommandePaiementPage() {
     e.preventDefault();
     setError(null);
 
-    const ok =
-      name.trim().length >= 2 &&
-      email.includes('@') &&
-      address.trim().length >= 8;
+    const addressText = addressValue?.formatted?.trim() ?? '';
+    const addressOk =
+      addressValue &&
+      (addressValue.validated || validateFrenchAddressManual(addressText).valid);
 
-    if (!ok || !lines.length) {
-      setError('Merci de remplir nom, une adresse e-mail valide et une adresse de livraison complète.');
+    if (
+      !lines.length ||
+      name.trim().length < 2 ||
+      !email.includes('@') ||
+      !addressOk ||
+      !addressText
+    ) {
+      setError(
+        'Merci de remplir nom, e-mail, et une adresse de livraison valide en France (sélectionnez une suggestion ou complétez la saisie manuelle).',
+      );
       return;
     }
 
@@ -51,7 +62,7 @@ export default function CommandePaiementPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           items: lines,
-          customer: { name: name.trim(), email: email.trim(), address: address.trim() },
+          customer: { name: name.trim(), email: email.trim(), address: addressText },
           note: note.trim() || undefined,
         }),
       });
@@ -125,20 +136,12 @@ export default function CommandePaiementPage() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div>
-            <label htmlFor="address" className="block text-sm font-medium text-maison-cacao mb-1.5">
-              Adresse de livraison
-            </label>
-            <textarea
-              id="address"
-              required
-              rows={4}
-              className="w-full rounded-2xl border border-maison-brun/15 px-4 py-3 focus:border-maison-brun outline-none resize-y bg-white text-maison-cacao"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="Rue, code postal, ville"
-            />
-          </div>
+          <FrenchAddressInput
+            value={addressValue}
+            onChange={setAddressValue}
+            disabled={busy}
+            required
+          />
           <div>
             <label htmlFor="note" className="block text-sm font-medium text-maison-cacao mb-1.5">
               Note pour la préparation (optionnel)

@@ -1,53 +1,11 @@
 import Image from 'next/image';
 import { AnimateSection } from '@/components/AnimateSection';
 import { RecettesCarousel } from '@/components/RecettesCarousel';
+import { CorpsBienfaitsSection } from '@/components/CorpsBienfaitsSection';
 import Link from 'next/link';
 import { ArrowRight, Droplets, Sparkles, Leaf, HeartHandshake } from 'lucide-react';
 
 const IMG = (path: string) => `/assets/images/savoir-plus/${path}`;
-
-const BIENFAITS_CORPS = [
-  {
-    key: 'cheveux',
-    title: 'Cheveux',
-    icon: '✨',
-    description:
-      "Nourrit les pointes et apporte de la brillance. Utilisable en masque ou en soin léger pour limiter les fourches.",
-  },
-  {
-    key: 'barbe',
-    title: 'Barbe',
-    icon: '🧔',
-    description:
-      "Hydrate la barbe et la peau. Quelques gouttes suffisent pour assouplir le poil et calmer les irritations.",
-  },
-  {
-    key: 'peau',
-    title: 'Peau & massage',
-    icon: '🤲',
-    description:
-      "Absorption rapide sur les zones sèches (mains, coudes, pieds). Idéale en massage pour hydrater et détendre.",
-  },
-  {
-    key: 'ongles',
-    title: 'Ongles & cuticules',
-    icon: '💅',
-    description:
-      'Aide à renforcer ongles et cuticules. Un massage court et régulier limite les gerçures.',
-  },
-] as const;
-
-function BienfaitCard({ title, icon, description }: { title: string; icon: string; description: string }) {
-  return (
-    <div className="group h-full p-5 sm:p-6 rounded-2xl bg-white border border-maison-brun/10 shadow-card transition-all duration-300 hover:border-maison-brun/25 hover:-translate-y-0.5">
-      <div className="flex items-center gap-3">
-        <span className="text-xl" aria-hidden>{icon}</span>
-        <h3 className="font-display text-lg sm:text-xl text-maison-brun">{title}</h3>
-      </div>
-      <p className="mt-3 text-maison-cacao/75 text-sm leading-relaxed">{description}</p>
-    </div>
-  );
-}
 
 const PRODUITS = [
   {
@@ -273,34 +231,7 @@ export default function SavoirPlusPage() {
                 </div>
               </AnimateSection>
             </section>
-
-            {/* Bienfaits pour le corps */}
-            <section id="sp-corps" className="py-12 sm:py-20 border-b border-maison-brun/10">
-              <AnimateSection>
-                <p className="section-animate text-[11px] font-semibold uppercase tracking-[0.22em] text-maison-terre">Soins du corps</p>
-                <h2 className="section-animate mt-2 font-display text-2xl sm:text-3xl font-semibold text-maison-cacao tracking-tight">
-                  Bienfaits pour le corps
-                </h2>
-                <p className="section-animate mt-3 text-maison-cacao/75 leading-relaxed max-w-2xl">
-                  Nos huiles sont utilisées depuis longtemps pour nourrir la peau et les cheveux. Quatre usages emblématiques.
-                </p>
-
-                <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {BIENFAITS_CORPS.map((b) => (
-                    <div key={b.key} className="section-animate-item">
-                      <BienfaitCard title={b.title} icon={b.icon} description={b.description} />
-                    </div>
-                  ))}
-                </div>
-
-                <div className="section-animate-item mt-8 flex justify-center">
-                  <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden ring-2 ring-maison-dore/40 shadow-warm">
-                    <Image src={IMG('huile-miracle-soins-cheveux.png')} alt="Huile Miracle Taskmout — soins du corps" fill className="object-cover" sizes="176px" />
-                    <div className="absolute inset-0 bg-gradient-to-br from-maison-dore/10 via-transparent to-maison-olive/10 pointer-events-none" />
-                  </div>
-                </div>
-              </AnimateSection>
-            </section>
+            <CorpsBienfaitsSection />
 
             {/* Recettes */}
             <section id="sp-recettes" className="py-12 sm:py-20 border-b border-maison-brun/10">
