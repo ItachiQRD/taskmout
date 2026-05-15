@@ -11,6 +11,13 @@ import type { Order } from '@/types/store';
 
 export const runtime = 'nodejs';
 
+export async function GET() {
+  return NextResponse.json(
+    { error: 'Utilisez POST pour créer une session de paiement.' },
+    { status: 405 },
+  );
+}
+
 type Body = {
   items?: { productId: string; quantity: number }[];
   customer?: { name: string; email: string; address: string };
@@ -18,66 +25,85 @@ type Body = {
 };
 
 export async function POST(req: Request) {
-  let body: Body;
   try {
-    body = (await req.json()) as Body;
-  } catch {
-    return NextResponse.json({ error: 'JSON invalide.' }, { status: 400 });
-  }
+    let body: Body;
+    try {
+      body = (await req.json()) as Body;
+    } catch {
+      return NextResponse.json({ error: 'JSON invalide.' }, { status: 400 });
+    }
 
-  const items = body.items;
-  const customer = body.customer;
-  if (!items || !customer?.email?.trim() || !customer.name?.trim() || !customer.address?.trim()) {
-    return NextResponse.json({ error: 'Données client ou panier manquantes.' }, { status: 400 });
-  }
+    const items = body.items;
+    const customer = body.customer;
+    if (!items || !customer?.email?.trim() || !customer.name?.trim() || !customer.address?.trim()) {
+      return NextResponse.json({ error: 'Données client ou panier manquantes.' }, { status: 400 });
+    }
 
-  const addressCheck = validateFrenchAddressManual(customer.address.trim());
-  if (!addressCheck.valid) {
-    return NextResponse.json(
-      { error: addressCheck.error ?? 'Adresse de livraison invalide (France uniquement).' },
-      { status: 400 },
-    );
-  }
+    const addressCheck = validateFrenchAddressManual(customer.address.trim());
+    if (!addressCheck.valid) {
+      return NextResponse.json(
+        { error: addressCheck.error ?? 'Adresse de livraison invalide (France uniquement).' },
+        { status: 400 },
+      );
+    }
 
-  const merchantCode = process.env.SUMUP_MERCHANT_CODE?.trim();
-  if (!merchantCode) {
-    return NextResponse.json(
-      { error: 'Configuration SumUp incomplète (SUMUP_MERCHANT_CODE).' },
-      { status: 503 }
-    );
-  }
+    const apiKey = process.env.SUMUP_API_KEY?.trim();
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'Configuration SumUp incomplète (SUMUP_API_KEY manquante).' },
+        { status: 503 },
+      );
+    }
 
-  const catalog = await getCatalogForCheckout();
-  const built = computeOrderFromCartItems(items, catalog);
-  if ('error' in built) {
-    return NextResponse.json({ error: built.error }, { status: 400 });
-  }
+    const merchantCode = process.env.SUMUP_MERCHANT_CODE?.trim();
+    if (!merchantCode) {
+      return NextResponse.json(
+        { error: 'Configuration SumUp incomplète (SUMUP_MERCHANT_CODE manquant).' },
+        { status: 503 },
+      );
+    }
 
-  const orderId = randomUUID();
-  const now = new Date().toISOString();
-  const pending: Order = {
-    id: orderId,
-    createdAt: now,
-    updatedAt: now,
-    status: 'pending',
-    email: customer.email.trim(),
-    name: customer.name.trim(),
-    address: customer.address.trim(),
-    items: built.items,
-    total: built.total,
-    note: body.note?.trim() || undefined,
-    paymentMethod: 'sumup',
-  };
+    const catalog = await getCatalogForCheckout();
+    const built = computeOrderFromCartItems(items, catalog);
+    if ('error' in built) {
+      return NextResponse.json({ error: built.error }, { status: 400 });
+    }
 
-  await upsertOrder(pending);
+    const orderId = randomUUID();
+    const now = new Date().toISOString();
+    const pending: Order = {
+      id: orderId,
+      createdAt: now,
+      updatedAt: now,
+      status: 'pending',
+      email: customer.email.trim(),
+      name: customer.name.trim(),
+      address: customer.address.trim(),
+      items: built.items,
+      total: built.total,
+      note: body.note?.trim() || undefined,
+      paymentMethod: 'sumup',
+    };
 
-  const base = getSiteBaseUrl();
-  const amount = Number.parseFloat(built.total.replace(',', '.'));
-  if (!Number.isFinite(amount) || amount <= 0) {
-    return NextResponse.json({ error: 'Montant invalide.' }, { status: 400 });
-  }
+    try {
+      await upsertOrder(pending);
+    } catch (storeErr) {
+      console.error('[checkout/sumup] order store', storeErr);
+      return NextResponse.json(
+        {
+          error:
+            'Impossible d’enregistrer la commande sur le serveur. Sur Vercel, configurez un stockage persistant (voir ORDER_STORE_PATH ou base de données).',
+        },
+        { status: 503 },
+      );
+    }
 
-  try {
+    const base = getSiteBaseUrl();
+    const amount = Number.parseFloat(built.total.replace(',', '.'));
+    if (!Number.isFinite(amount) || amount <= 0) {
+      return NextResponse.json({ error: 'Montant invalide.' }, { status: 400 });
+    }
+
     const checkout = await sumupCreateHostedCheckout({
       amount,
       checkout_reference: orderId,
@@ -114,10 +140,15 @@ export async function POST(req: Request) {
       }
     }
 
-    await upsertOrder({
-      ...withCheckout,
-      ...(emailPaymentLinkSentAt ? { emailPaymentLinkSentAt } : {}),
-    });
+    try {
+      await upsertOrder({
+        ...withCheckout,
+        ...(emailPaymentLinkSentAt ? { emailPaymentLinkSentAt } : {}),
+      });
+    } catch (storeErr) {
+      console.error('[checkout/sumup] order store update', storeErr);
+      // Checkout SumUp créé : on renvoie quand même l’URL de paiement
+    }
 
     return NextResponse.json({
       orderId,
@@ -125,7 +156,8 @@ export async function POST(req: Request) {
       hostedCheckoutUrl: hostedUrl,
     });
   } catch (e) {
-    const message = e instanceof Error ? e.message : 'Erreur SumUp';
+    console.error('[checkout/sumup]', e);
+    const message = e instanceof Error ? e.message : 'Erreur serveur';
     return NextResponse.json({ error: message }, { status: 502 });
   }
 }

@@ -67,21 +67,35 @@ export default function CommandePaiementPage() {
         }),
       });
 
-      const data = (await res.json()) as {
-        hostedCheckoutUrl?: string;
-        error?: string;
-      };
+      const raw = await res.text();
+      let data: { hostedCheckoutUrl?: string; error?: string } = {};
+      try {
+        data = raw ? (JSON.parse(raw) as typeof data) : {};
+      } catch {
+        setError(
+          res.ok
+            ? 'Réponse serveur invalide.'
+            : `Erreur serveur (${res.status}). Vérifiez la configuration SumUp dans les variables d’environnement.`,
+        );
+        setBusy(false);
+        return;
+      }
 
       if (!res.ok || !data.hostedCheckoutUrl) {
-        setError(data.error ?? 'Impossible de démarrer le paiement. Réessayez plus tard.');
+        setError(data.error ?? `Impossible de démarrer le paiement (${res.status}).`);
         setBusy(false);
         return;
       }
 
       clear();
       window.location.href = data.hostedCheckoutUrl;
-    } catch {
-      setError('Erreur réseau.');
+    } catch (err) {
+      console.error('checkout', err);
+      setError(
+        err instanceof TypeError
+          ? 'Connexion impossible. Vérifiez votre réseau ou réessayez dans quelques instants.'
+          : 'Erreur inattendue. Réessayez plus tard.',
+      );
       setBusy(false);
     }
   }
